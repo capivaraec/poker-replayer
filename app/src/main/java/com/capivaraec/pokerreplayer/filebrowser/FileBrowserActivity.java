@@ -2,7 +2,6 @@ package com.capivaraec.pokerreplayer.filebrowser;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -24,10 +23,9 @@ public class FileBrowserActivity extends Activity {
 	private static final String DIRECTORY = "directory";
     private ActionBar actionBar;
 	private ListView listView;
-	private FileBrowserAdapter adapter;
 	private File currentDirectory;
 	private File[] files;
-	private FileFilter filter = new FileFilter() {
+	private final FileFilter filter = new FileFilter() {
 
 		@Override
 		public boolean accept(File pathname) {
@@ -79,8 +77,7 @@ public class FileBrowserActivity extends Activity {
 					SharedPreferences.Editor editor = settings.edit();
 					editor.putString(DIRECTORY, currentDirectory.getAbsolutePath());
 
-					// Confirma a gravação dos dados
-					editor.commit();
+					editor.apply();
 				}
 			}
 		});
@@ -89,7 +86,7 @@ public class FileBrowserActivity extends Activity {
 	private void showDirectory() {
 		files = currentDirectory.listFiles(filter);
 
-		adapter = new FileBrowserAdapter(FileBrowserActivity.this, R.layout.file_browser_item, files);
+        FileBrowserAdapter adapter = new FileBrowserAdapter(FileBrowserActivity.this, files);
 		listView.setAdapter(adapter);
 
         if (actionBar != null) {
@@ -110,11 +107,6 @@ public class FileBrowserActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
 	}
 
 }

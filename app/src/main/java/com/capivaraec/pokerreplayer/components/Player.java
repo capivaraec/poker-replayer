@@ -11,19 +11,19 @@ import com.capivaraec.pokerreplayer.R;
 
 public class Player extends LinearLayout {
 
-    public String name;
-    public String stack;
-    private TextView tvName;
-    private TextView tvStack;
+    private String name;
+    private String stack;
+    private final TextView tvName;
+    private final TextView tvStack;
 
     public Player(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.player, this);
+        layoutInflater.inflate(R.layout.player, this);
 
-        tvName = (TextView) findViewById(R.id.name);
-        tvStack = (TextView) findViewById(R.id.stack);
+        tvName = (TextView) findViewById(R.id.tv_name);
+        tvStack = (TextView) findViewById(R.id.tv_stack);
     }
 
     public void setName(String name) {

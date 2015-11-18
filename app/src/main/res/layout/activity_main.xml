@@ -29,33 +29,17 @@
             android:layout_width="55dp"
             android:layout_height="fill_parent"
             android:text="&gt;&gt;"/>
-
         <Button
             android:id="@+id/button_open"
             android:layout_width="55dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:text="^"
             android:onClick="openFileBrowser"/>
-        <LinearLayout
+        <com.capivaraec.pokerreplayer.components.HandInfo
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-            android:background="#fff"
-            android:layout_marginLeft="15dp">
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Info 1"/>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Info 2"/>
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Info 3"/>
-        </LinearLayout>
+            android:layout_height="fill_parent"/>
     </LinearLayout>
 
     <RelativeLayout

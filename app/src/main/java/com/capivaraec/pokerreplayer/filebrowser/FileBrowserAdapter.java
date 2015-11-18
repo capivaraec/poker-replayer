@@ -12,17 +12,15 @@ import android.widget.TextView;
 
 import com.capivaraec.pokerreplayer.R;
 
-public class FileBrowserAdapter extends ArrayAdapter<File> {
+class FileBrowserAdapter extends ArrayAdapter<File> {
 
-	private Context context;
-	private int layoutResourceId;
-	private File[] files;
+	private final Context context;
+	private final File[] files;
 
-	public FileBrowserAdapter(Context context, int layoutResourceId, File[] files) {
-		super(context, layoutResourceId, files);
+	public FileBrowserAdapter(Context context, File[] files) {
+		super(context, R.layout.file_browser_item, files);
 
 		this.context = context;
-		this.layoutResourceId = layoutResourceId;
 		this.files = files;
 	}
 
@@ -33,7 +31,7 @@ public class FileBrowserAdapter extends ArrayAdapter<File> {
 
 		if (row == null) {
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			row = inflater.inflate(layoutResourceId, parent, false);
+			row = inflater.inflate(R.layout.file_browser_item, parent, false);
 
 			holder = new FileHolder();
 			holder.imgIcon = (ImageView) row.findViewById(R.id.imgIcon);

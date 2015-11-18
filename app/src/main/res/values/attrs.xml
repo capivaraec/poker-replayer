@@ -1,6 +1,2 @@
 <resources>
-    <declare-styleable name="Player">
-        <attr name="name" format="string"/>
-        <attr name="stack" format="string"/>
-    </declare-styleable>
 </resources>

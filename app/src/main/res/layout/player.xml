@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/name"
+            android:id="@+id/tv_name"
             android:gravity="center_horizontal"/>
         <LinearLayout
             android:layout_width="fill_parent"
@@ -27,7 +27,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/stack"
+            android:id="@+id/tv_stack"
             android:gravity="center_horizontal"/>
     </LinearLayout>
 
