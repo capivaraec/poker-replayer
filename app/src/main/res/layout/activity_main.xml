@@ -1,31 +1,147 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="#0099cc" tools:context=".MainActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#0099cc"
+    tools:context=".FullscreenActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-    <TextView android:id="@+id/fullscreen_content" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:keepScreenOn="true" android:textColor="#33b5e5"
-        android:textStyle="bold" android:textSize="50sp" android:gravity="center"
-        android:text="@string/dummy_content" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:id="@+id/bottom_bar"
+        android:layout_alignParentBottom="true"
+        android:background="#000"
+        android:orientation="horizontal"
+        android:padding="5dp">
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:text=""/>
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:text=""/>
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:text=""/>
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:text=""/>
 
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
-
-        <LinearLayout android:id="@+id/fullscreen_content_controls" style="?metaButtonBarStyle"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay" android:orientation="horizontal"
-            tools:ignore="UselessParent">
-
-            <Button android:id="@+id/dummy_button" style="?metaButtonBarButtonStyle"
-                android:layout_width="0dp" android:layout_height="wrap_content"
-                android:layout_weight="1" android:text="@string/dummy_button" />
-
+        <Button
+            android:layout_marginLeft="15dp"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:text=""/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:background="#fff"
+            android:layout_marginLeft="15dp">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Info 1"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Info 2"/>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Info 3"/>
         </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 
-</FrameLayout>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/bottom_bar">
+        <LinearLayout
+            android:id="@+id/center_line"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_10"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_9"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@id/player_10"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_1"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/player_10"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_2"
+            android:layout_alignParentRight="true"
+            android:layout_above="@id/center_line"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_3"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/center_line"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_4"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@id/player_1"
+            android:layout_marginBottom="10dp"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_5"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_6"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@id/player_9"
+            android:layout_marginBottom="10dp"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_7"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@id/center_line"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_8"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/center_line"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
