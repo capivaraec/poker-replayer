@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button_width">69dp</dimen>
+    <dimen name="button_width">74dp</dimen>
     <dimen name="button_margin">19dp</dimen>
     <dimen name="handbar_height">88dp</dimen>
     <dimen name="handbar_padding">7dp</dimen>

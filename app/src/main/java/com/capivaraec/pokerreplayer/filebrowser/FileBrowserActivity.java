@@ -86,6 +86,10 @@ public class FileBrowserActivity extends Activity {
 	private void showDirectory() {
 		files = currentDirectory.listFiles(filter);
 
+		if (files == null) {
+            files = new File[0];
+        }
+
         FileBrowserAdapter adapter = new FileBrowserAdapter(FileBrowserActivity.this, files);
 		listView.setAdapter(adapter);
 
