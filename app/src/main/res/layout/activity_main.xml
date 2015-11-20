@@ -7,34 +7,34 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/handbar_height"
         android:id="@+id/bottom_bar"
         android:layout_alignParentBottom="true"
         android:background="#000"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="@dimen/handbar_padding">
         <Button
-            android:layout_width="55dp"
+            android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&lt;&lt;"/>
         <Button
-            android:layout_width="55dp"
+            android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&lt;"/>
         <Button
-            android:layout_width="55dp"
+            android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&gt;"/>
         <Button
-            android:layout_width="55dp"
+            android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&gt;&gt;"/>
         <Button
             android:id="@+id/button_open"
-            android:layout_width="55dp"
+            android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="@dimen/button_margin"
+            android:layout_marginRight="@dimen/button_margin"
             android:text="^"
             android:onClick="openFileBrowser"/>
         <com.capivaraec.pokerreplayer.components.HandInfo
@@ -49,7 +49,7 @@
         <LinearLayout
             android:id="@+id/center_line"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/center_line_height"
             android:layout_centerInParent="true"
             android:orientation="horizontal"/>
 
@@ -66,8 +66,8 @@
             android:id="@+id/player_9"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/player_10"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginRight="@dimen/player_horizontal_margin"
+            android:layout_marginTop="@dimen/player_vertical_margin"/>
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
@@ -75,8 +75,8 @@
             android:id="@+id/player_1"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/player_10"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginLeft="@dimen/player_horizontal_margin"
+            android:layout_marginTop="@dimen/player_vertical_margin"/>
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
             android:id="@+id/player_4"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@id/player_1"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="@dimen/player_vertical_margin"/>
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
             android:id="@+id/player_6"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@id/player_9"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="@dimen/player_vertical_margin"/>
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
