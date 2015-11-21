@@ -36,7 +36,7 @@
             android:layout_marginLeft="@dimen/button_margin"
             android:layout_marginRight="@dimen/button_margin"
             android:text="^"
-            android:onClick="openFileBrowser"/>
+            android:onClick="openBottomSheet"/>
         <com.capivaraec.pokerreplayer.components.HandInfo
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"/>
