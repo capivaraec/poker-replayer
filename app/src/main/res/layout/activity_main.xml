@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="@drawable/back"
     tools:context=".FullscreenActivity">
 
     <LinearLayout
@@ -10,25 +10,28 @@
         android:layout_height="@dimen/handbar_height"
         android:id="@+id/bottom_bar"
         android:layout_alignParentBottom="true"
-        android:background="#000"
         android:orientation="horizontal"
         android:padding="@dimen/handbar_padding">
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&lt;&lt;"/>
+            android:text="&lt;&lt;"
+            android:visibility="gone" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&lt;"/>
+            android:text="&lt;"
+            android:visibility="gone" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&gt;"/>
+            android:text="&gt;"
+            android:visibility="gone" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&gt;&gt;"/>
+            android:text="&gt;&gt;"
+            android:visibility="gone" />
         <Button
             android:id="@+id/button_open"
             android:layout_width="@dimen/button_width"
@@ -41,8 +44,8 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff"
-            android:onClick="flipCard"/>
+            android:onClick="flipCard"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <RelativeLayout
