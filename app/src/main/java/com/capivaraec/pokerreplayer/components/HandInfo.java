@@ -27,6 +27,9 @@ public class HandInfo extends LinearLayout {
         tvBlinds = (TextView) findViewById(R.id.tv_blinds);
         tvPot = (TextView) findViewById(R.id.tv_pot);
         tvPotOdds = (TextView) findViewById(R.id.tv_pot_odds);
+
+        setPot(12);
+        setPotOdds(150);
     }
 
     public void setBlinds(String blinds) {
