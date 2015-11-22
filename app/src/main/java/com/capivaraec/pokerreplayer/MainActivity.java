@@ -1,28 +1,29 @@
 package com.capivaraec.pokerreplayer;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
 import com.capivaraec.pokerreplayer.components.Player;
 import com.capivaraec.pokerreplayer.filebrowser.FileBrowserActivity;
+import com.capivaraec.pokerreplayer.history.HistoryReader;
 import com.dropbox.chooser.android.DbxChooser;
+
+import java.io.File;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -33,11 +34,14 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public static final String PREFS_NAME = "preferences";
     private static final String FILE_PATH = "file_path";
     private static final int DBX_CHOOSER_REQUEST = 0;
+    private static final int DEVICE_CHOOSER_REQUEST = 1;
     private DbxChooser mChooser;
     private Dialog mBottomSheetDialog;
     private boolean mShowingBack;
     private Handler mHandler = new Handler();
     private static HandInfo handInfo;
+    private File file;
+    private ProgressDialog progress;
 
     private Player[] players;
 
@@ -66,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         }
 
         getFragmentManager().addOnBackStackChangedListener(this);
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        String filePath = settings.getString(FILE_PATH, null);
+        if (filePath != null) {
+            File file = new File(filePath);
+            //TODO: chamar parse e depois pular para a mão que tinha parado antes
+        }
     }
 
     private void setBottomSheet() {
@@ -98,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     public void openDeviceBrowser(View v) {
         closeBottomSheet(null);
         Intent intent = new Intent(this, FileBrowserActivity.class);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, DEVICE_CHOOSER_REQUEST);
     }
 
     public void openDropboxBrowser(View v) {
@@ -111,16 +122,52 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == DBX_CHOOSER_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                DbxChooser.Result result = new DbxChooser.Result(data);
-                System.out.println(result.getLink()); //endereço do arquivo no dispositivo
+        if (resultCode == Activity.RESULT_OK) {
+            startProgress();
 
-                // Handle the result
+            boolean open = false;
+            if (requestCode == DBX_CHOOSER_REQUEST) {
+                DbxChooser.Result result = new DbxChooser.Result(data);
+
+                file = new File(result.getLink().getPath());
+                open = true;
+            } else if (requestCode == DEVICE_CHOOSER_REQUEST) {
+                file = (File) data.getSerializableExtra("result");
+                open = true;
+            } else {
+                super.onActivityResult(requestCode, resultCode, data);
+                progress.dismiss();
             }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
+
+            if (open) {
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        HistoryReader.readFile(file, MainActivity.this);
+                        file = null;
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress.dismiss();
+                            }
+                        });
+                    }
+                };
+
+                thread.start();
+            }
         }
+    }
+
+    private void startProgress() {
+        if (progress == null) {
+            progress = new ProgressDialog(this);
+            progress.setTitle("Loading");
+            progress.setMessage("Wait while loading...");
+        }
+
+        progress.show();
     }
 
     public void flipCard(View v) {
