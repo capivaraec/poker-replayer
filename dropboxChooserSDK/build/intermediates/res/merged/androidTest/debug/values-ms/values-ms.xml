@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/values-ms/values-ms.xml -->
+    <!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/values-ms/values-ms.xml -->
     <eat-comment/>
     <string name="dbx_install">Pasang Dropbox</string>
     <string name="dbx_install_button_cancel">Batal</string>

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
@@ -43,7 +44,12 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     private ProgressDialog progress;
     private History history;
     private int currentHand;
+    private int currentAction;
     private Player[] players;
+    private Button btnPreviousHand;
+    private Button btnPreviousAction;
+    private Button btnNextAction;
+    private Button btnNextHand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         setBottomSheet();
 
         handInfo = (HandInfo) findViewById(R.id.hand_info);
+        btnPreviousHand = (Button) findViewById(R.id.button_previous_hand);
+        btnPreviousAction = (Button) findViewById(R.id.button_previous_action);
+        btnNextAction = (Button) findViewById(R.id.button_next_action);
+        btnNextHand = (Button) findViewById(R.id.button_next_hand);
 
         if (savedInstanceState == null) {
             // If there is no saved instance state, add a fragment representing the
@@ -78,8 +88,16 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
             }
             currentHand = Cache.getCurrentHand(this);
             setPlayers();
-            //TODO: readHand();
+            showNavigationButtons();
+            readHand();
         }
+    }
+
+    private void showNavigationButtons() {
+        btnPreviousHand.setVisibility(View.VISIBLE);
+        btnPreviousAction.setVisibility(View.VISIBLE);
+        btnNextAction.setVisibility(View.VISIBLE);
+        btnNextHand.setVisibility(View.VISIBLE);
     }
 
     private void setBottomSheet() {
@@ -92,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     private void setPlayers() {
         players = new Player[history.getNumPlayers()];
-
+        //TODO: achar forma de distribuir melhor os jogadores na mesa em caso de short-hand
         for(int x = 1; x <= history.getNumPlayers(); x++) {
             String playerId = "player_" + x;
             int resID = getResources().getIdentifier(playerId, "id", getPackageName());
@@ -170,18 +188,61 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         recreate();
     }
 
+    private void readHand() {
+        setButtonsEnabled();
+    }
+
+    private void readAction() {
+        setButtonsEnabled();
+    }
+
+    private void setButtonsEnabled() {
+        btnPreviousHand.setEnabled(false);
+        btnPreviousAction.setEnabled(false);
+        btnNextHand.setEnabled(false);
+        btnNextAction.setEnabled(false);
+
+        if (currentHand != 0) {
+            btnPreviousHand.setEnabled(true);
+        }
+
+        if (currentHand < history.getHands().size() - 1) {
+            btnNextHand.setEnabled(true);
+        }
+
+        if (currentAction != 0) {
+            btnPreviousAction.setEnabled(true);
+        }
+
+        if (currentAction < history.getHand(currentHand).getActions().size() - 1) {
+            btnNextAction.setEnabled(true);
+        }
+    }
+
     public void previousHand(View v) {
+        currentHand--;
+        currentAction = 0;
+
         Cache.setCurrentHand(this, currentHand);
+        readHand();
     }
 
     public void previousAction(View v) {
+        currentAction--;
+        readAction();
     }
 
     public void nextAction(View v) {
+        currentAction++;
+        readAction();
     }
 
     public void nextHand(View v) {
+        currentHand++;
+        currentAction = 0;
+
         Cache.setCurrentHand(this, currentHand);
+        readHand();
     }
 
     private void startProgress() {

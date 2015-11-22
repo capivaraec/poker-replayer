@@ -434,7 +434,7 @@ public class HistoryReader {
 	}
 
 	private static String getPlayerName(String line) {
-		int indexColon = line.indexOf(':');
+		int indexColon = line.lastIndexOf(':');
 
 		return line.substring(0, indexColon);
 	}

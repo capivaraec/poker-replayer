@@ -15,24 +15,28 @@
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
+            android:id="@+id/button_previous_hand"
             android:text="@string/previous_hand"
             android:visibility="gone"
             android:onClick="previousHand" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
+            android:id="@+id/button_previous_action"
             android:text="@string/previous_action"
             android:visibility="gone"
-            android:onClick="previousAction"/>
+            android:onClick="previousAction" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
+            android:id="@+id/button_next_action"
             android:text="@string/next_action"
             android:visibility="gone"
             android:onClick="nextAction"/>
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
+            android:id="@+id/button_next_hand"
             android:text="@string/next_hand"
             android:visibility="gone"
             android:onClick="nextHand"/>

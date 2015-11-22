@@ -9,4 +9,4 @@
           android:drawable="@drawable/common_btn_light_gray_disabled" />
     <item android:drawable="@drawable/common_btn_light_gray_normal" />
 </selector>
-<!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/src/main/res/drawable/common_button_light_gray.xml --><!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/drawable/common_button_light_gray.xml -->
+<!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/src/main/res/drawable/common_button_light_gray.xml --><!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/drawable/common_button_light_gray.xml -->

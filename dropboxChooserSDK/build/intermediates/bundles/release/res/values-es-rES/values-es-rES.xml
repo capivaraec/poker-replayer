@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/src/main/res/values-es-rES/strings.xml -->
+    <!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/src/main/res/values-es-rES/strings.xml -->
     <eat-comment/>
     <string name="dbx_install">Instalar Dropbox</string>
     <string name="dbx_install_button_cancel">Cancelar</string>
