@@ -32,8 +32,7 @@ public class HistoryReader {
 	private static int pot = 0;
 	private static int toCall = 0;
 
-	public static History readFile(File file, Context context) {
-		boolean cache = true;
+	public static History readFile(File file) {
 
 		History history = new History();
 		BufferedReader br = null;
@@ -54,7 +53,7 @@ public class HistoryReader {
 					}
 
 					hand = new Hand();
-					players = new HashMap<String, Player>();
+					players = new HashMap<>();
 					street = Street.PRE_FLOP;
 					pot = 0;
 					newHand(hand, players, line, history);
@@ -127,7 +126,6 @@ public class HistoryReader {
 			}
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
-			cache = false;
 
 			return null;
 		} finally {
@@ -136,10 +134,6 @@ public class HistoryReader {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-
-		if (cache) {
-			Cache.writeObject(context, file.getName(), history);
 		}
 
 		return history;

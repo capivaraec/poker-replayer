@@ -20,7 +20,9 @@ import android.widget.LinearLayout;
 import com.capivaraec.pokerreplayer.components.HandInfo;
 import com.capivaraec.pokerreplayer.components.Player;
 import com.capivaraec.pokerreplayer.filebrowser.FileBrowserActivity;
+import com.capivaraec.pokerreplayer.history.History;
 import com.capivaraec.pokerreplayer.history.HistoryReader;
+import com.capivaraec.pokerreplayer.utils.Cache;
 import com.dropbox.chooser.android.DbxChooser;
 
 import java.io.File;
@@ -31,8 +33,6 @@ import java.io.File;
  */
 public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
-    public static final String PREFS_NAME = "preferences";
-    private static final String FILE_PATH = "file_path";
     private static final int DBX_CHOOSER_REQUEST = 0;
     private static final int DEVICE_CHOOSER_REQUEST = 1;
     private DbxChooser mChooser;
@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     private static HandInfo handInfo;
     private File file;
     private ProgressDialog progress;
-
+    private History history;
+    private int currentHand;
     private Player[] players;
 
     @Override
@@ -52,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         setBottomSheet();
-
-        setPlayers();
 
         handInfo = (HandInfo) findViewById(R.id.hand_info);
 
@@ -71,11 +70,16 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
         getFragmentManager().addOnBackStackChangedListener(this);
 
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        String filePath = settings.getString(FILE_PATH, null);
+        String filePath = Cache.getFilePath(this);
         if (filePath != null) {
             File file = new File(filePath);
-            //TODO: chamar parse e depois pular para a mão que tinha parado antes
+            history = Cache.readHistory(this, file.getName());
+            if (history == null) {
+                return;
+            }
+            currentHand = Cache.getCurrentHand(this);
+            setPlayers();
+            //TODO: readHand();
         }
     }
 
@@ -88,13 +92,13 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     }
 
     private void setPlayers() {
-        //TODO: chamar este método apenas após carregar o torneio (se for 6-max, carregar somente 6 jogadores)
-        players = new Player[10];
+        players = new Player[history.getNumPlayers()];
 
-        for(int x = 1; x <= 10; x++) {
+        for(int x = 1; x <= history.getNumPlayers(); x++) {
             String playerId = "player_" + x;
             int resID = getResources().getIdentifier(playerId, "id", getPackageName());
             players[x - 1] = (Player) findViewById(resID);
+            players[x - 1].setVisibility(View.VISIBLE);
         }
     }
 
@@ -143,13 +147,13 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 Thread thread = new Thread() {
                     @Override
                     public void run() {
-                        HistoryReader.readFile(file, MainActivity.this);
-                        file = null;
+                        history = HistoryReader.readFile(file);
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 progress.dismiss();
+                                newHistory();
                             }
                         });
                     }
@@ -158,6 +162,28 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
                 thread.start();
             }
         }
+    }
+
+    private void newHistory() {
+        if (history != null) {
+            Cache.writeHistory(this, file, history);
+        }
+        //TODO: salvar histórico atual para ser aberto após recriação
+        recreate();
+    }
+
+    public void previousHand(View v) {
+        Cache.setCurrentHand(this, currentHand);
+    }
+
+    public void previousAction(View v) {
+    }
+
+    public void nextAction(View v) {
+    }
+
+    public void nextHand(View v) {
+        Cache.setCurrentHand(this, currentHand);
     }
 
     private void startProgress() {

@@ -15,8 +15,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import com.capivaraec.pokerreplayer.MainActivity;
 import com.capivaraec.pokerreplayer.R;
+import com.capivaraec.pokerreplayer.utils.Cache;
 
 public class FileBrowserActivity extends Activity {
 
@@ -49,7 +49,7 @@ public class FileBrowserActivity extends Activity {
 
 		listView = (ListView) findViewById(R.id.listView);
 
-		SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(Cache.PREFS_NAME, 0);
 		String path = settings.getString(DIRECTORY, Environment.getExternalStorageDirectory().getAbsolutePath());
 
 		currentDirectory = new File(path);
@@ -73,7 +73,7 @@ public class FileBrowserActivity extends Activity {
 					setResult(RESULT_OK, returnIntent);
 					finish();
 
-					SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+					SharedPreferences settings = getSharedPreferences(Cache.PREFS_NAME, 0);
 					SharedPreferences.Editor editor = settings.edit();
 					editor.putString(DIRECTORY, currentDirectory.getAbsolutePath());
 

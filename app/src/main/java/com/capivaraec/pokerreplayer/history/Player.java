@@ -43,7 +43,7 @@ public class Player implements Serializable, Cloneable {
 
 	public void addCard(String card) {
 		if (cards == null) {
-			cards = new ArrayList<String>();
+			cards = new ArrayList<>();
 		}
 
 		cards.add(card);

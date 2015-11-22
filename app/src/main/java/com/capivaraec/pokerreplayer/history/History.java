@@ -77,7 +77,7 @@ public class History implements Serializable {
 
 	public void addHand(Hand hand) {
 		if (hands == null) {
-			hands = new ArrayList<Hand>();
+			hands = new ArrayList<>();
 		}
 		hands.add(hand);
 	}

@@ -16,22 +16,26 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&lt;&lt;"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:onClick="previousHand" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&lt;"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:onClick="previousAction"/>
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&gt;"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:onClick="nextAction"/>
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
             android:text="&gt;&gt;"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:onClick="nextHand"/>
         <Button
             android:id="@+id/button_open"
             android:layout_width="@dimen/button_width"
@@ -64,7 +68,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/player_10"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
@@ -73,7 +78,8 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/player_10"
             android:layout_marginRight="@dimen/player_horizontal_margin"
-            android:layout_marginTop="@dimen/player_vertical_margin"/>
+            android:layout_marginTop="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
@@ -82,21 +88,24 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/player_10"
             android:layout_marginLeft="@dimen/player_horizontal_margin"
-            android:layout_marginTop="@dimen/player_vertical_margin"/>
+            android:layout_marginTop="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player_2"
             android:layout_alignParentRight="true"
-            android:layout_above="@id/center_line"/>
+            android:layout_above="@id/center_line"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player_3"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/center_line"/>
+            android:layout_below="@id/center_line"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
@@ -104,14 +113,16 @@
             android:id="@+id/player_4"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@id/player_1"
-            android:layout_marginBottom="@dimen/player_vertical_margin"/>
+            android:layout_marginBottom="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player_5"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
@@ -119,21 +130,24 @@
             android:id="@+id/player_6"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@id/player_9"
-            android:layout_marginBottom="@dimen/player_vertical_margin"/>
+            android:layout_marginBottom="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player_7"
             android:layout_alignParentLeft="true"
-            android:layout_above="@id/center_line"/>
+            android:layout_above="@id/center_line"
+            android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/player_8"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/center_line"/>
+            android:layout_below="@id/center_line"
+            android:visibility="invisible" />
 
     </RelativeLayout>
 

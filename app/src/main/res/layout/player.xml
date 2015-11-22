@@ -5,8 +5,7 @@
     android:layout_height="@dimen/player_height"
     android:padding="@dimen/player_padding"
     android:layout_margin="@dimen/player_margin"
-    android:background="@drawable/player_border"
-    android:visibility="invisible">
+    android:background="@drawable/player_border">
 
     <LinearLayout
         android:layout_width="@dimen/player_image_width"
