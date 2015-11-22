@@ -2,25 +2,20 @@ package com.capivaraec.pokerreplayer;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
 import com.capivaraec.pokerreplayer.components.Player;
 import com.capivaraec.pokerreplayer.filebrowser.FileBrowserActivity;
+import com.capivaraec.pokerreplayer.history.Hand;
 import com.capivaraec.pokerreplayer.history.History;
 import com.capivaraec.pokerreplayer.history.HistoryReader;
 import com.capivaraec.pokerreplayer.utils.Cache;
@@ -28,19 +23,13 @@ import com.dropbox.chooser.android.DbxChooser;
 
 import java.io.File;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- */
 public class MainActivity extends AppCompatActivity {
 
     private static final int DBX_CHOOSER_REQUEST = 0;
     private static final int DEVICE_CHOOSER_REQUEST = 1;
     private DbxChooser mChooser;
     private Dialog mBottomSheetDialog;
-    private boolean mShowingBack;
-    private final Handler mHandler = new Handler();
-    private static HandInfo handInfo;
+    private HandInfo handInfo;
     private File file;
     private ProgressDialog progress;
     private History history;
@@ -109,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int[] getPlayersPositions(int numPlayers) {
-        int[] positions = null;
+        int[] positions;
         switch (numPlayers) {
             case 2:
                 positions = new int[]{3, 7};
@@ -213,7 +202,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void readHand() {
         setButtonsEnabled();
-        handInfo.setBlinds(currentAction, currentHand, 0, this);
+        Hand hand = history.getHand(currentHand);
+        //TODO: apagar informações atuais da mão (retirar fichas da mesa etc)
+
+        setHandInfo(hand);
+    }
+
+    private void setHandInfo(Hand hand) {
+        handInfo.setGame(hand.getGame());
+        handInfo.setBlinds(hand.getSmallBlind(), hand.getBigBlind(), hand.getAnte());
+        handInfo.setDate(hand.getDate());
+        handInfo.setHandNumber(currentHand, history.getHands().size());
+        handInfo.setTable(hand.getTable());
+        handInfo.updateAdapter();
     }
 
     private void readAction() {

@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:id="@+id/hand_info"
             android:background="#fff"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
     </LinearLayout>
 
     <RelativeLayout

@@ -218,7 +218,7 @@ public class HistoryReader {
 		int finalIndexTable = line.lastIndexOf('\'');
 		String table = line.substring(initialIndexTable, finalIndexTable);
 
-		hand.setTable(table);
+		hand.setTable(Integer.parseInt(table));
 	}
 
 	private static void setChips(Hand hand, HashMap<String, Player> players, String line) {

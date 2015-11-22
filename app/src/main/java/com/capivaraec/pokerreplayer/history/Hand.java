@@ -16,7 +16,7 @@ public class Hand implements Serializable {
 	private int bigBlind;
 	private int button;
 	private Limit limit;
-	private String table;
+	private int table;
 	private String game;
 	private GameType gameType;
 	private int ante;
@@ -58,11 +58,11 @@ public class Hand implements Serializable {
 		this.limit = limit;
 	}
 
-	public String getTable() {
+	public int getTable() {
 		return table;
 	}
 
-	public void setTable(String table) {
+	public void setTable(int table) {
 		this.table = table;
 	}
 

@@ -46,7 +46,7 @@ public class HandInfoAdapter extends ArrayAdapter<HashMap<String, String>> {
             holder = (FileHolder) row.getTag();
         }
 
-        holder.tvTitle.setText(list.get(position).get("title") + ":");
+        holder.tvTitle.setText(list.get(position).get("title") + ": ");
         holder.tvDescription.setText(list.get(position).get("description"));
 
         return row;
