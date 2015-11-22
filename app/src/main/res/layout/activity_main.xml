@@ -6,7 +6,7 @@
     tools:context=".FullscreenActivity">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/handbar_height"
         android:id="@+id/bottom_bar"
         android:layout_alignParentBottom="true"
@@ -14,28 +14,28 @@
         android:padding="@dimen/handbar_padding">
         <Button
             android:layout_width="@dimen/button_width"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:id="@+id/button_previous_hand"
             android:text="@string/previous_hand"
             android:visibility="gone"
             android:onClick="previousHand" />
         <Button
             android:layout_width="@dimen/button_width"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:id="@+id/button_previous_action"
             android:text="@string/previous_action"
             android:visibility="gone"
             android:onClick="previousAction" />
         <Button
             android:layout_width="@dimen/button_width"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:id="@+id/button_next_action"
             android:text="@string/next_action"
             android:visibility="gone"
             android:onClick="nextAction"/>
         <Button
             android:layout_width="@dimen/button_width"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:id="@+id/button_next_hand"
             android:text="@string/next_hand"
             android:visibility="gone"
@@ -43,26 +43,26 @@
         <Button
             android:id="@+id/button_open"
             android:layout_width="@dimen/button_width"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/button_margin"
             android:layout_marginRight="@dimen/button_margin"
             android:text="@string/open_history"
             android:onClick="openBottomSheet"/>
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/container"
+        <com.capivaraec.pokerreplayer.components.HandInfo
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="flipCard"
-            android:visibility="gone"/>
+            android:id="@+id/hand_info"
+            android:background="#fff"
+            android:visibility="visible"/>
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@id/bottom_bar">
         <LinearLayout
             android:id="@+id/center_line"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/center_line_height"
             android:layout_centerInParent="true"
             android:orientation="horizontal"/>
@@ -151,7 +151,7 @@
             android:id="@+id/player_7"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_above="@id/center_line"
+            android:layout_below="@id/center_line"
             android:visibility="invisible" />
 
         <com.capivaraec.pokerreplayer.components.Player
@@ -160,7 +160,7 @@
             android:id="@+id/player_8"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/center_line"
+            android:layout_above="@id/center_line"
             android:visibility="invisible" />
 
     </RelativeLayout>

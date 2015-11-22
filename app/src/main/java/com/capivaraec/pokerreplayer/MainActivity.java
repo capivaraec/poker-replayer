@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
@@ -31,7 +32,7 @@ import java.io.File;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class MainActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final int DBX_CHOOSER_REQUEST = 0;
     private static final int DEVICE_CHOOSER_REQUEST = 1;
@@ -65,20 +66,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         btnNextAction = (Button) findViewById(R.id.button_next_action);
         btnNextHand = (Button) findViewById(R.id.button_next_hand);
 
-        if (savedInstanceState == null) {
-            // If there is no saved instance state, add a fragment representing the
-            // front of the card to this activity. If there is saved instance state,
-            // this fragment will have already been added to the activity.
-            getFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.container, new CardFrontFragment())
-                    .commit();
-        } else {
-            mShowingBack = (getFragmentManager().getBackStackEntryCount() > 0);
-        }
-
-        getFragmentManager().addOnBackStackChangedListener(this);
-
         String filePath = Cache.getFilePath(this);
         if (filePath != null) {
             File file = new File(filePath);
@@ -88,16 +75,17 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
             }
             currentHand = Cache.getCurrentHand(this);
             setPlayers();
-            showNavigationButtons();
+            showNavigationBar();
             readHand();
         }
     }
 
-    private void showNavigationButtons() {
+    private void showNavigationBar() {
         btnPreviousHand.setVisibility(View.VISIBLE);
         btnPreviousAction.setVisibility(View.VISIBLE);
         btnNextAction.setVisibility(View.VISIBLE);
         btnNextHand.setVisibility(View.VISIBLE);
+        handInfo.setVisibility(View.VISIBLE);
     }
 
     private void setBottomSheet() {
@@ -110,13 +98,48 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     private void setPlayers() {
         players = new Player[history.getNumPlayers()];
-        //TODO: achar forma de distribuir melhor os jogadores na mesa em caso de short-hand
-        for(int x = 1; x <= history.getNumPlayers(); x++) {
-            String playerId = "player_" + x;
+        int[] positions = getPlayersPositions(history.getNumPlayers());
+
+        for(int x = 0; x <= history.getNumPlayers() - 1; x++) {
+            String playerId = "player_" + positions[x];
             int resID = getResources().getIdentifier(playerId, "id", getPackageName());
-            players[x - 1] = (Player) findViewById(resID);
-            players[x - 1].setVisibility(View.VISIBLE);
+            players[x] = (Player) findViewById(resID);
+            players[x].setVisibility(View.VISIBLE);
         }
+    }
+
+    private int[] getPlayersPositions(int numPlayers) {
+        int[] positions = null;
+        switch (numPlayers) {
+            case 2:
+                positions = new int[]{3, 7};
+                break;
+            case 3:
+                positions = new int[]{3, 5, 7};
+                break;
+            case 4:
+                positions = new int[]{1, 4, 6, 9};
+                break;
+            case 5:
+                positions = new int[]{1, 3, 5, 7, 9};
+                break;
+            case 6:
+                positions = new int[]{2, 3, 5, 7, 8, 10};
+                break;
+            case 7:
+                positions = new int[]{1, 3, 4, 5, 6, 7, 9};
+                break;
+            case 8:
+                positions = new int[]{1, 2, 3, 4, 6, 7, 8, 9};
+                break;
+            default:
+                positions = new int[numPlayers];
+                for (int x = 0; x < numPlayers; x++) {
+                    positions[x] = x + 1;
+                }
+        }
+
+        return positions;
     }
 
     public void openBottomSheet(View v) {
@@ -190,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
 
     private void readHand() {
         setButtonsEnabled();
+        handInfo.setBlinds(currentAction, currentHand, 0, this);
     }
 
     private void readAction() {
@@ -253,84 +277,5 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         }
 
         progress.show();
-    }
-
-    public void flipCard(View v) {
-        if (mShowingBack) {
-            getFragmentManager().popBackStack();
-            return;
-        }
-
-        // Flip to the back.
-
-        mShowingBack = true;
-
-        // Create and commit a new fragment transaction that adds the fragment for the back of
-        // the card, uses custom animations, and is part of the fragment manager's back stack.
-
-        getFragmentManager()
-                .beginTransaction()
-
-                        // Replace the default fragment animations with animator resources representing
-                        // rotations when switching to the back of the card, as well as animator
-                        // resources representing rotations when flipping back to the front (e.g. when
-                        // the system Back button is pressed).
-                .setCustomAnimations(
-                        R.anim.card_flip_right_in, R.anim.card_flip_right_out,
-                        R.anim.card_flip_left_in, R.anim.card_flip_left_out)
-
-                        // Replace any fragments currently in the container view with a fragment
-                        // representing the next page (indicated by the just-incremented currentPage
-                        // variable).
-                .replace(R.id.container, new CardBackFragment())
-
-                        // Add this transaction to the back stack, allowing users to press Back
-                        // to get to the front of the card.
-                .addToBackStack(null)
-
-                        // Commit the transaction.
-                .commit();
-
-        // Defer an invalidation of the options menu (on modern devices, the action bar). This
-        // can't be done immediately because the transaction may not yet be committed. Commits
-        // are asynchronous in that they are posted to the main thread's message loop.
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                invalidateOptionsMenu();
-            }
-        });
-    }
-
-    /**
-     * A fragment representing the front of the card.
-     */
-    public static class CardFrontFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_card_front, container, false);
-        }
-    }
-
-    /**
-     * A fragment representing the back of the card.
-     */
-    public static class CardBackFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_card_back, container, false);
-        }
-    }
-
-    @Override
-    public void onBackStackChanged() {
-        mShowingBack = (getFragmentManager().getBackStackEntryCount() > 0);
-
-        // When the back stack changes, invalidate the options menu (action bar).
-        invalidateOptionsMenu();
     }
 }
