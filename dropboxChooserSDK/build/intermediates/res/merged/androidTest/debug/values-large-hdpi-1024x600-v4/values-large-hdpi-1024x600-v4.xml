@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/values-large-hdpi-1024x600-v4/values-large-hdpi-1024x600-v4.xml -->
+    <!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/values-large-hdpi-1024x600-v4/values-large-hdpi-1024x600-v4.xml -->
     <eat-comment/>
     <dimen name="dbx_action_bar_default_height">48dip</dimen>
     <dimen name="dbx_action_bar_icon_vertical_padding">8dip</dimen>

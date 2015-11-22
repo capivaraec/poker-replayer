@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/barLightBorder"/>
+        </shape>
+    </item>
+    <item android:top="1px">
+        <shape>
+            <solid android:color="@color/barLight"/>
+        </shape>
+    </item>
+</layer-list>
+<!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/src/main/res/drawable/common_bar_light_gray_bottom.xml --><!-- From: file:/D:/poker-replayer-android/PokerReplayer/build/intermediates/exploded-aar/poker-replayer-android/dropboxChooserSDK/unspecified/res/drawable/common_bar_light_gray_bottom.xml -->

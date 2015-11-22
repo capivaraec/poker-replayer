@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/poker-replayer-android/PokerReplayer/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-xlarge/values-xlarge.xml -->
+    <eat-comment/>
+    <bool name="abc_action_bar_expanded_action_views_exclusive">false</bool>
+    <item name="abc_dialog_fixed_height_major" type="dimen">60%</item>
+    <item name="abc_dialog_fixed_height_minor" type="dimen">90%</item>
+    <item name="abc_dialog_fixed_width_major" type="dimen">50%</item>
+    <item name="abc_dialog_fixed_width_minor" type="dimen">70%</item>
+    <item name="abc_dialog_min_width_major" type="dimen">45%</item>
+    <item name="abc_dialog_min_width_minor" type="dimen">72%</item>
+    <dimen name="abc_search_view_text_min_width">192dip</dimen>
+    <!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/values-xlarge/dimen.xml -->
+    <eat-comment/>
+    <dimen name="button_margin">23dp</dimen>
+    <dimen name="button_width">89dp</dimen>
+    <dimen name="center_line_height">75dp</dimen>
+    <dimen name="file_image_margin">15dp</dimen>
+    <dimen name="file_image_size">48dp</dimen>
+    <dimen name="file_name_margin">15dp</dimen>
+    <dimen name="handbar_height">105dp</dimen>
+    <dimen name="handbar_padding">8dp</dimen>
+    <dimen name="player_height">60dp</dimen>
+    <dimen name="player_horizontal_margin">60dp</dimen>
+    <dimen name="player_image_width">57dp</dimen>
+    <dimen name="player_line_height">3dp</dimen>
+    <dimen name="player_margin">8dp</dimen>
+    <dimen name="player_padding">2dp</dimen>
+    <dimen name="player_vertical_margin">25dp</dimen>
+    <dimen name="player_width">195dp</dimen>
+    <!-- From: file:/D:/poker-replayer-android/PokerReplayer/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-xlarge/values-xlarge.xml -->
+    <eat-comment/>
+    <integer name="abc_max_action_buttons">5</integer>
+</resources>

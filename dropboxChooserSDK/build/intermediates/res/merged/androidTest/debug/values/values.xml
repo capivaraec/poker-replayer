@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="https://android.dropbox.com/StringsSchema">
-    <!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/values/values.xml -->
+    <!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/values/values.xml -->
     <eat-comment/>
     <color name="actionBarBackground">#007de3</color>
     <color name="actionBarHighlight">#000000</color>

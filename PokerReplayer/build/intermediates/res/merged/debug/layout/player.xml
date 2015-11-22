@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="@dimen/player_width"
+    android:layout_height="@dimen/player_height"
+    android:padding="@dimen/player_padding"
+    android:layout_margin="@dimen/player_margin"
+    android:background="@drawable/player_border">
+
+    <LinearLayout
+        android:layout_width="@dimen/player_image_width"
+        android:layout_height="match_parent"
+        android:background="#000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_name"
+            android:gravity="center_horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/player_line_height"
+            android:orientation="horizontal"
+            android:background="#000"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_stack"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+</LinearLayout><!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/layout/player.xml -->

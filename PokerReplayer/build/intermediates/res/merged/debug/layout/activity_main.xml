@@ -1,0 +1,169 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    tools:context=".FullscreenActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/handbar_height"
+        android:id="@+id/bottom_bar"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="@dimen/handbar_padding">
+        <Button
+            android:layout_width="@dimen/button_width"
+            android:layout_height="match_parent"
+            android:id="@+id/button_previous_hand"
+            android:text="@string/previous_hand"
+            android:visibility="gone"
+            android:onClick="previousHand" />
+        <Button
+            android:layout_width="@dimen/button_width"
+            android:layout_height="match_parent"
+            android:id="@+id/button_previous_action"
+            android:text="@string/previous_action"
+            android:visibility="gone"
+            android:onClick="previousAction" />
+        <Button
+            android:layout_width="@dimen/button_width"
+            android:layout_height="match_parent"
+            android:id="@+id/button_next_action"
+            android:text="@string/next_action"
+            android:visibility="gone"
+            android:onClick="nextAction"/>
+        <Button
+            android:layout_width="@dimen/button_width"
+            android:layout_height="match_parent"
+            android:id="@+id/button_next_hand"
+            android:text="@string/next_hand"
+            android:visibility="gone"
+            android:onClick="nextHand"/>
+        <Button
+            android:id="@+id/button_open"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/button_margin"
+            android:layout_marginRight="@dimen/button_margin"
+            android:text="@string/open_history"
+            android:onClick="openBottomSheet"/>
+        <com.capivaraec.pokerreplayer.components.HandInfo
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/hand_info"
+            android:background="#fff"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_bar">
+        <LinearLayout
+            android:id="@+id/center_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/center_line_height"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"/>
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_10"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_9"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@id/player_10"
+            android:layout_toStartOf="@id/player_10"
+            android:layout_marginRight="@dimen/player_horizontal_margin"
+            android:layout_marginEnd="@dimen/player_horizontal_margin"
+            android:layout_marginTop="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_1"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/player_10"
+            android:layout_toEndOf="@id/player_10"
+            android:layout_marginLeft="@dimen/player_horizontal_margin"
+            android:layout_marginStart="@dimen/player_horizontal_margin"
+            android:layout_marginTop="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/center_line"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_3"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/center_line"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_4"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@id/player_1"
+            android:layout_alignStart="@id/player_1"
+            android:layout_marginBottom="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_5"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_6"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@id/player_9"
+            android:layout_alignStart="@id/player_9"
+            android:layout_marginBottom="@dimen/player_vertical_margin"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_7"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/center_line"
+            android:visibility="invisible" />
+
+        <com.capivaraec.pokerreplayer.components.Player
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_8"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@id/center_line"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+<!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/layout/activity_main.xml -->

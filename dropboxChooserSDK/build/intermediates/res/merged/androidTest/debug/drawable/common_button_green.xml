@@ -9,4 +9,4 @@
           android:drawable="@drawable/common_btn_green_disabled" />
     <item android:drawable="@drawable/common_btn_green_normal" />
 </selector>
-<!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/src/main/res/drawable/common_button_green.xml --><!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/drawable/common_button_green.xml -->
+<!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/src/main/res/drawable/common_button_green.xml --><!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/build/intermediates/bundles/debug/res/drawable/common_button_green.xml -->

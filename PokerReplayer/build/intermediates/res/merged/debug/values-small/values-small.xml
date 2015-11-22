@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/values-small/dimen.xml -->
+    <eat-comment/>
+    <dimen name="button_margin">12dp</dimen>
+    <dimen name="button_width">46dp</dimen>
+    <dimen name="center_line_height">23dp</dimen>
+    <dimen name="file_image_margin">8dp</dimen>
+    <dimen name="file_image_size">25dp</dimen>
+    <dimen name="file_name_margin">8dp</dimen>
+    <dimen name="handbar_height">54dp</dimen>
+    <dimen name="handbar_padding">4dp</dimen>
+    <dimen name="player_height">31dp</dimen>
+    <dimen name="player_horizontal_margin">15dp</dimen>
+    <dimen name="player_image_width">29dp</dimen>
+    <dimen name="player_line_height">2dp</dimen>
+    <dimen name="player_margin">4dp</dimen>
+    <dimen name="player_padding">1dp</dimen>
+    <dimen name="player_vertical_margin">8dp</dimen>
+    <dimen name="player_width">100dp</dimen>
+</resources>

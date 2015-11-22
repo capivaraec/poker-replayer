@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/Users/marcelobogdanovicz/Documents/poker-replayer-android/dropboxChooserSDK/src/main/res/values-sw600dp/abs__dimens.xml -->
+    <!-- From: file:/D:/poker-replayer-android/dropboxChooserSDK/src/main/res/values-sw600dp/abs__dimens.xml -->
     <eat-comment/>
     <dimen name="dbx_action_bar_default_height">56dip</dimen>
     <dimen name="dbx_action_bar_icon_vertical_padding">4dip</dimen>

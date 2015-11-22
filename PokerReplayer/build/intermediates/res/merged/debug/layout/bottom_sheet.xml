@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_window"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tv_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/file_icon"
+        android:drawableStart="@drawable/file_icon"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:text="@string/choose_device"
+        android:onClick="openDeviceBrowser"/>
+
+    <TextView
+        android:id="@+id/tv_dropbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/folder_icon"
+        android:drawableStart="@drawable/folder_icon"
+        android:drawablePadding="16dp"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:text="@string/choose_dropbox"
+        android:onClick="openDropboxBrowser"/>
+
+</LinearLayout><!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/layout/bottom_sheet.xml -->
