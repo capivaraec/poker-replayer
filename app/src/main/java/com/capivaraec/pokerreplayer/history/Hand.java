@@ -8,8 +8,6 @@ import com.capivaraec.pokerreplayer.enums.Limit;
 
 public class Hand implements Serializable {
 
-	private static final long serialVersionUID = -1608557859112328723L;
-
 	private enum GameType {
 		TEXAS_HOLDEM
 	}
@@ -102,7 +100,7 @@ public class Hand implements Serializable {
 
 	public void addAction(Action action) {
 		if (actions == null) {
-			actions = new ArrayList<Action>();
+			actions = new ArrayList<>();
 		}
 
 		actions.add(action);

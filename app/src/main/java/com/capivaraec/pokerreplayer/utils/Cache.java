@@ -10,7 +10,6 @@ import java.io.ObjectOutputStream;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.capivaraec.pokerreplayer.MainActivity;
 import com.capivaraec.pokerreplayer.history.History;
 
 public class Cache {
@@ -51,7 +50,7 @@ public class Cache {
         return settings.getInt(CURRENT_HAND, 0);
     }
 
-    public static void setFilePath(Context context, String path) {
+    private static void setFilePath(Context context, String path) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
 

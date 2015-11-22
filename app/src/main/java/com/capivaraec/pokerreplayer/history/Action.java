@@ -7,7 +7,6 @@ import com.capivaraec.pokerreplayer.enums.Street;
 
 public class Action implements Serializable {
 
-	private static final long serialVersionUID = -4870563170952856442L;
 	private Player player;
 	private int value;
 	private ActionID actionID;

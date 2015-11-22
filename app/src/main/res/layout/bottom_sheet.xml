@@ -13,10 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/file_icon"
+        android:drawableStart="@drawable/file_icon"
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:padding="16dp"
-        android:text="Dispositivo"
+        android:text="@string/choose_device"
         android:onClick="openDeviceBrowser"/>
 
     <TextView
@@ -24,10 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/folder_icon"
+        android:drawableStart="@drawable/folder_icon"
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
         android:padding="16dp"
-        android:text="Dropbox"
+        android:text="@string/choose_dropbox"
         android:onClick="openDropboxBrowser"/>
 
 </LinearLayout>

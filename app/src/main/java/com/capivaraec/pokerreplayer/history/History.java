@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 public class History implements Serializable {
 
-	private static final long serialVersionUID = 2019763739104900771L;
-
 	private enum Session {
 		TOURNEY, RING
 	}

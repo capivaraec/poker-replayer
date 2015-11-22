@@ -3,7 +3,6 @@ package com.capivaraec.pokerreplayer.components;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,9 +26,6 @@ public class HandInfo extends LinearLayout {
         tvBlinds = (TextView) findViewById(R.id.tv_blinds);
         tvPot = (TextView) findViewById(R.id.tv_pot);
         tvPotOdds = (TextView) findViewById(R.id.tv_pot_odds);
-
-        setPot(12);
-        setPotOdds(150);
     }
 
     public void setBlinds(String blinds) {

@@ -15,25 +15,25 @@
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&lt;&lt;"
+            android:text="@string/previous_hand"
             android:visibility="gone"
             android:onClick="previousHand" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&lt;"
+            android:text="@string/previous_action"
             android:visibility="gone"
             android:onClick="previousAction"/>
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&gt;"
+            android:text="@string/next_action"
             android:visibility="gone"
             android:onClick="nextAction"/>
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="fill_parent"
-            android:text="&gt;&gt;"
+            android:text="@string/next_hand"
             android:visibility="gone"
             android:onClick="nextHand"/>
         <Button
@@ -42,7 +42,7 @@
             android:layout_height="fill_parent"
             android:layout_marginLeft="@dimen/button_margin"
             android:layout_marginRight="@dimen/button_margin"
-            android:text="^"
+            android:text="@string/open_history"
             android:onClick="openBottomSheet"/>
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/container"
@@ -77,7 +77,9 @@
             android:id="@+id/player_9"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@id/player_10"
+            android:layout_toStartOf="@id/player_10"
             android:layout_marginRight="@dimen/player_horizontal_margin"
+            android:layout_marginEnd="@dimen/player_horizontal_margin"
             android:layout_marginTop="@dimen/player_vertical_margin"
             android:visibility="invisible" />
 
@@ -87,7 +89,9 @@
             android:id="@+id/player_1"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/player_10"
+            android:layout_toEndOf="@id/player_10"
             android:layout_marginLeft="@dimen/player_horizontal_margin"
+            android:layout_marginStart="@dimen/player_horizontal_margin"
             android:layout_marginTop="@dimen/player_vertical_margin"
             android:visibility="invisible" />
 
@@ -96,6 +100,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/player_2"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_above="@id/center_line"
             android:visibility="invisible" />
 
@@ -104,6 +109,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/player_3"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/center_line"
             android:visibility="invisible" />
 
@@ -113,6 +119,7 @@
             android:id="@+id/player_4"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@id/player_1"
+            android:layout_alignStart="@id/player_1"
             android:layout_marginBottom="@dimen/player_vertical_margin"
             android:visibility="invisible" />
 
@@ -130,6 +137,7 @@
             android:id="@+id/player_6"
             android:layout_alignParentBottom="true"
             android:layout_alignLeft="@id/player_9"
+            android:layout_alignStart="@id/player_9"
             android:layout_marginBottom="@dimen/player_vertical_margin"
             android:visibility="invisible" />
 
@@ -138,6 +146,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/player_7"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_above="@id/center_line"
             android:visibility="invisible" />
 
@@ -146,6 +155,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/player_8"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_below="@id/center_line"
             android:visibility="invisible" />
 

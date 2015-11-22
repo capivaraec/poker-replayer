@@ -6,7 +6,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     private DbxChooser mChooser;
     private Dialog mBottomSheetDialog;
     private boolean mShowingBack;
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private static HandInfo handInfo;
     private File file;
     private ProgressDialog progress;
@@ -106,18 +105,18 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         mBottomSheetDialog.show();
     }
 
-    public void closeBottomSheet(View v) {
+    private void closeBottomSheet() {
         mBottomSheetDialog.hide();
     }
 
     public void openDeviceBrowser(View v) {
-        closeBottomSheet(null);
+        closeBottomSheet();
         Intent intent = new Intent(this, FileBrowserActivity.class);
         startActivityForResult(intent, DEVICE_CHOOSER_REQUEST);
     }
 
     public void openDropboxBrowser(View v) {
-        closeBottomSheet(null);
+        closeBottomSheet();
         if (mChooser == null) {
             mChooser = new DbxChooser("xwctj62gvp3l598");
         }
@@ -168,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
         if (history != null) {
             Cache.writeHistory(this, file, history);
         }
-        //TODO: salvar histórico atual para ser aberto após recriação
         recreate();
     }
 
@@ -189,8 +187,8 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
     private void startProgress() {
         if (progress == null) {
             progress = new ProgressDialog(this);
-            progress.setTitle("Loading");
-            progress.setMessage("Wait while loading...");
+            progress.setTitle(getString(R.string.progress_title));
+            progress.setMessage(getString(R.string.progress_message));
         }
 
         progress.show();
@@ -247,8 +245,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
      * A fragment representing the front of the card.
      */
     public static class CardFrontFragment extends Fragment {
-        public CardFrontFragment() {
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -261,8 +257,6 @@ public class MainActivity extends AppCompatActivity implements FragmentManager.O
      * A fragment representing the back of the card.
      */
     public static class CardBackFragment extends Fragment {
-        public CardBackFragment() {
-        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,

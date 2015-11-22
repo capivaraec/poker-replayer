@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 public class Player implements Serializable, Cloneable {
 
-	private static final long serialVersionUID = -5480715553088484137L;
 	private String name;
 	private int stack;
 	private ArrayList<String> cards;
@@ -57,13 +56,12 @@ public class Player implements Serializable, Cloneable {
 		this.position = position;
 	}
 
-	protected Object clone() {
+	protected Object cloneObject() {
 		try {
-			return super.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-
+            super.clone();
+        } catch (CloneNotSupportedException cnse) {
+            cnse.printStackTrace();
+        }
 		return this;
 	}
 }

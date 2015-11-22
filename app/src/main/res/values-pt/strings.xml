@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Capivara Poker Replayer</string>
+    <string name="progress_title">Carregando</string>
+    <string name="progress_message">Carregando histórico, por favor aguarde…</string>
+    <string name="previous_hand">&lt;&lt;</string>
+    <string name="previous_action">&lt;</string>
+    <string name="next_action">&gt;</string>
+    <string name="next_hand">&gt;&gt;</string>
+    <string name="open_history">^</string>
+    <string name="choose_device">Escolher do dispositivo</string>
+    <string name="choose_dropbox">Escolher do Dropbox</string>
+    <string name="image_icon_description">Ícone do item</string>
+</resources>
