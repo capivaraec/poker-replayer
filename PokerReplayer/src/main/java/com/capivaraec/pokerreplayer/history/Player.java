@@ -56,7 +56,7 @@ public class Player implements Serializable, Cloneable {
 		this.position = position;
 	}
 
-	protected Object cloneObject() {
+	protected Player cloneObject() {
 		try {
             super.clone();
         } catch (CloneNotSupportedException cnse) {

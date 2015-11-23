@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_name"
-            android:gravity="center_horizontal|bottom"
+            android:gravity="center_horizontal"
             android:singleLine="true"
             android:layout_alignParentTop="true" />
         <LinearLayout

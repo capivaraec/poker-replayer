@@ -14,7 +14,9 @@ import android.widget.LinearLayout;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
 import com.capivaraec.pokerreplayer.components.LayoutPlayer;
+import com.capivaraec.pokerreplayer.enums.ActionID;
 import com.capivaraec.pokerreplayer.filebrowser.FileBrowserActivity;
+import com.capivaraec.pokerreplayer.history.Action;
 import com.capivaraec.pokerreplayer.history.Hand;
 import com.capivaraec.pokerreplayer.history.History;
 import com.capivaraec.pokerreplayer.history.HistoryReader;
@@ -23,6 +25,7 @@ import com.capivaraec.pokerreplayer.utils.Cache;
 import com.dropbox.chooser.android.DbxChooser;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private History history;
     private int currentHand;
     private int currentAction;
+    private int initialAction;
     private LayoutPlayer[] players;
     private Button btnPreviousHand;
     private Button btnPreviousAction;
@@ -207,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
         Hand hand = history.getHand(currentHand);
         clearTable();
         setHandInfo(hand);
+        readAction();
     }
 
     private void clearTable() {
@@ -222,11 +227,31 @@ public class MainActivity extends AppCompatActivity {
         handInfo.updateAdapter();
 
         setPlayers(hand.getPlayers());
-        putBlindsAndAntes();
+        putBlindsAndAntes(hand);
     }
 
-    private void putBlindsAndAntes() {
+    private void putBlindsAndAntes(Hand hand) {
+        ArrayList<Action> actions = hand.getActions();
+        for (Action action : actions) {
+            ActionID actionID = action.getActionID();
+            if (actionID == ActionID.SMALL_BLIND || actionID == ActionID.BIG_BLIND) {
+                putBet(action);
+            } else if (actionID == ActionID.ANTE) {
+                putBet(action);
+            } else if (actionID == ActionID.HOLE_CARDS) {
+//                setPlayerCards(action.getPlayer());
+            } else {
+                currentAction--;
+                break;
+            }
+            currentAction++;
+        }
+        initialAction = currentAction;
+    }
 
+    private void putBet(Action action) {
+        int position = action.getPlayer().getPosition() - 1;
+        players[position].setStack(action.getPlayer().getStack());
     }
 
     private void setPlayers(HashMap<String, Player> players) {
@@ -266,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
             btnNextHand.setEnabled(true);
         }
 
-        if (currentAction != 0) {
+        if (currentAction > initialAction) {
             btnPreviousAction.setEnabled(true);
         }
 
