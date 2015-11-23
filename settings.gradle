@@ -1,2 +1,2 @@
-include ':PokerReplayer'
+include ':PokerReplayer', ':AutoFitTextViewLibrary'
 include ':dropboxChooserSDK'

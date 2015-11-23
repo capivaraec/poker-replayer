@@ -13,15 +13,17 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
-import com.capivaraec.pokerreplayer.components.Player;
+import com.capivaraec.pokerreplayer.components.LayoutPlayer;
 import com.capivaraec.pokerreplayer.filebrowser.FileBrowserActivity;
 import com.capivaraec.pokerreplayer.history.Hand;
 import com.capivaraec.pokerreplayer.history.History;
 import com.capivaraec.pokerreplayer.history.HistoryReader;
+import com.capivaraec.pokerreplayer.history.Player;
 import com.capivaraec.pokerreplayer.utils.Cache;
 import com.dropbox.chooser.android.DbxChooser;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private History history;
     private int currentHand;
     private int currentAction;
-    private Player[] players;
+    private LayoutPlayer[] players;
     private Button btnPreviousHand;
     private Button btnPreviousAction;
     private Button btnNextAction;
@@ -86,13 +88,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setPlayers() {
-        players = new Player[history.getNumPlayers()];
+        players = new LayoutPlayer[history.getNumPlayers()];
         int[] positions = getPlayersPositions(history.getNumPlayers());
 
         for(int x = 0; x <= history.getNumPlayers() - 1; x++) {
             String playerId = "player_" + positions[x];
             int resID = getResources().getIdentifier(playerId, "id", getPackageName());
-            players[x] = (Player) findViewById(resID);
+            players[x] = (LayoutPlayer) findViewById(resID);
             players[x].setVisibility(View.VISIBLE);
         }
     }
@@ -203,9 +205,12 @@ public class MainActivity extends AppCompatActivity {
     private void readHand() {
         setButtonsEnabled();
         Hand hand = history.getHand(currentHand);
-        //TODO: apagar informações atuais da mão (retirar fichas da mesa etc)
-
+        clearTable();
         setHandInfo(hand);
+    }
+
+    private void clearTable() {
+        //TODO: retirar fichas e cartas da mesa
     }
 
     private void setHandInfo(Hand hand) {
@@ -215,6 +220,32 @@ public class MainActivity extends AppCompatActivity {
         handInfo.setHandNumber(currentHand, history.getHands().size());
         handInfo.setTable(hand.getTable());
         handInfo.updateAdapter();
+
+        setPlayers(hand.getPlayers());
+        putBlindsAndAntes();
+    }
+
+    private void putBlindsAndAntes() {
+
+    }
+
+    private void setPlayers(HashMap<String, Player> players) {
+        for (LayoutPlayer lPlayer : this.players) {
+            lPlayer.setVisibility(View.INVISIBLE);
+        }
+
+        for (String key : players.keySet()) {
+            Player player = players.get(key);
+
+            if (player.getPosition() == 0) {
+                continue;
+            }
+            int position = player.getPosition() - 1;
+
+            this.players[(position)].setName(player.getName());
+            this.players[position].setStack(player.getStack());
+            this.players[position].setVisibility(View.VISIBLE);
+        }
     }
 
     private void readAction() {

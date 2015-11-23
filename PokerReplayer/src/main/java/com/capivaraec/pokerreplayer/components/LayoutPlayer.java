@@ -8,14 +8,14 @@ import android.widget.TextView;
 
 import com.capivaraec.pokerreplayer.R;
 
-public class Player extends LinearLayout {
+import java.text.DecimalFormat;
 
-    private String name;
-    private String stack;
+public class LayoutPlayer extends LinearLayout {
+
     private final TextView tvName;
     private final TextView tvStack;
 
-    public Player(Context context, AttributeSet attrs) {
+    public LayoutPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -29,8 +29,9 @@ public class Player extends LinearLayout {
         tvName.setText(name);
     }
 
-    public void setStack(float stack) {
-        String strStack = "$ " + stack;
+    public void setStack(float stack) {//TODO: verificar se é cash e colocar a moeda correta (dólar, euro etc)
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String strStack = "$ " + decimalFormat.format(stack);
         tvStack.setText(strStack);
     }
 }
