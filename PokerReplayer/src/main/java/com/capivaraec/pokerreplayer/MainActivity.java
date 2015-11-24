@@ -92,10 +92,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setPlayers() {
-        players = new LayoutPlayer[history.getNumPlayers()];
-        int[] positions = getPlayersPositions(history.getNumPlayers());
+        Hand hand = history.getHand(currentHand);
+        players = new LayoutPlayer[hand.getNumPlayers()];
+        int[] positions = getPlayersPositions(hand.getNumPlayers());
 
-        for(int x = 0; x <= history.getNumPlayers() - 1; x++) {
+        for(int x = 0; x <= hand.getNumPlayers() - 1; x++) {
             String playerId = "player_" + positions[x];
             int resID = getResources().getIdentifier(playerId, "id", getPackageName());
             players[x] = (LayoutPlayer) findViewById(resID);
@@ -211,7 +212,6 @@ public class MainActivity extends AppCompatActivity {
         Hand hand = history.getHand(currentHand);
         clearTable();
         setHandInfo(hand);
-        readAction();
     }
 
     private void clearTable() {
@@ -275,6 +275,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void readAction() {
         setButtonsEnabled();
+        Action action = history.getHand(currentHand).getAction(currentAction);
+        Player player = action.getPlayer();
+        int position = player.getPosition() - 1;
+
+        if (position < 0) { //TODO: colocar cartas do board
+            return;
+        }
+
+        players[position].setStack(player.getStack());
+        players[position].setAction(action.getActionID());
     }
 
     private void setButtonsEnabled() {

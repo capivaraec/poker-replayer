@@ -3,18 +3,29 @@ package com.capivaraec.pokerreplayer.history;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player implements Serializable, Cloneable {
+public class Player implements Serializable {
 
 	private String name;
-	private int stack;
 	private ArrayList<String> cards;
 	private int position;
+    private float stack;
 
-	public Player(String name, int stack, int position) {
+	public Player(String name, float stack, int position) {
 		this.name = name;
-		this.stack = stack;
+        this.stack = stack;
 		this.position = position;
 	}
+
+	public Player(String name) {
+		this.name = name;
+	}
+
+    private Player(String name, ArrayList<String> cards, int position, float stack) {
+        this.name = name;
+        this.cards = cards;
+        this.position = position;
+        this.stack = stack;
+    }
 
 	public String getName() {
 		return name;
@@ -24,13 +35,13 @@ public class Player implements Serializable, Cloneable {
 		this.name = name;
 	}
 
-	public int getStack() {
-		return stack;
-	}
+    public float getStack() {
+        return stack;
+    }
 
-	public void setStack(int stack) {
-		this.stack = stack;
-	}
+    public void setStack(float stack) {
+        this.stack = stack;
+    }
 
 	public ArrayList<String> getCards() {
 		return cards;
@@ -52,16 +63,11 @@ public class Player implements Serializable, Cloneable {
 		return position;
 	}
 
-	public void setPosition(int position) {
-		this.position = position;
-	}
+    public void decreaseStack(float value) {
+        stack -= value;
+    }
 
-	protected Player cloneObject() {
-		try {
-            super.clone();
-        } catch (CloneNotSupportedException cnse) {
-            cnse.printStackTrace();
-        }
-		return this;
-	}
+    protected Player clonePlayer() {
+        return new Player(name, cards, position, stack);
+    }
 }

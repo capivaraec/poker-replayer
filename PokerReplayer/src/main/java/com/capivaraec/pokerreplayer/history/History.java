@@ -1,44 +1,24 @@
 package com.capivaraec.pokerreplayer.history;
 
+import com.capivaraec.pokerreplayer.enums.Session;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class History implements Serializable {
 
-	private enum Session {
-		TOURNEY, RING
-	}
-
-	private double buyIn;
-	private double rake;
-	private int numPlayers;
+	private String buyIn;
 	private String room;
 	private Session session;
 	private ArrayList<Hand> hands;
 	private long tourney;
 
-	public double getBuyIn() {
+	public String getBuyIn() {
 		return buyIn;
 	}
 
-	public void setBuyIn(double buyIn) {
+	public void setBuyIn(String buyIn) {
 		this.buyIn = buyIn;
-	}
-
-	public double getRake() {
-		return rake;
-	}
-
-	public void setRake(double rake) {
-		this.rake = rake;
-	}
-
-	public int getNumPlayers() {
-		return numPlayers;
-	}
-
-	public void setNumPlayers(int numPlayers) {
-		this.numPlayers = numPlayers;
 	}
 
 	public String getRoom() {

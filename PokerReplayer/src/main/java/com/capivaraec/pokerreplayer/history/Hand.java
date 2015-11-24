@@ -8,23 +8,19 @@ import com.capivaraec.pokerreplayer.enums.Limit;
 
 public class Hand implements Serializable {
 
-	private enum GameType {
-		TEXAS_HOLDEM
-	}
-
 	private int smallBlind;
 	private int bigBlind;
 	private int button;
 	private Limit limit;
 	private int table;
 	private String game;
-	private GameType gameType;
 	private int ante;
 	private ArrayList<Action> actions;
 	private int pot;
 	private long hand;
 	private Date date;
 	private HashMap<String, Player> players;
+	private int numPlayers;
 
 	public int getSmallBlind() {
 		return smallBlind;
@@ -72,14 +68,6 @@ public class Hand implements Serializable {
 
 	public void setGame(String game) {
 		this.game = game;
-	}
-
-	public GameType getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(GameType gameType) {
-		this.gameType = gameType;
 	}
 
 	public int getAnte() {
@@ -145,5 +133,13 @@ public class Hand implements Serializable {
 	public void setPlayers(HashMap<String, Player> players) {
 		this.players = players;
 	}
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
 
 }

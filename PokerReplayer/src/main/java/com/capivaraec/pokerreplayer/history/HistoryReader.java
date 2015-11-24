@@ -15,6 +15,7 @@ import java.util.TimeZone;
 import android.util.Log;
 import com.capivaraec.pokerreplayer.enums.ActionID;
 import com.capivaraec.pokerreplayer.enums.Limit;
+import com.capivaraec.pokerreplayer.enums.Session;
 import com.capivaraec.pokerreplayer.enums.Street;
 
 public class HistoryReader {
@@ -35,7 +36,7 @@ public class HistoryReader {
 			String line;
 
 			Hand hand = null;
-			HashMap<String, Player> players = null;
+			HashMap<String, Player> players = null; //TODO: precisa dessa variável aqui?
 			Street street = Street.PRE_FLOP;
 			while ((line = br.readLine()) != null) {
 				if (line.contains("Level ")) {
@@ -50,29 +51,28 @@ public class HistoryReader {
 					pot = 0;
 					newHand(hand, players, line, history);
 				} else if (line.startsWith("Table")) {
-					setTable(hand, line, history);
-				} else if (line.contains(" in chips)")) { //TODO: verificar se cash game também tem esse texto para mostrar stack
+                    setButton(hand, line);
+                    setNumPlayers(hand, line);
+					setTable(hand, line);
+				} else if (line.contains(" in chips)")) {
 					setChips(hand, players, line);
 				} else if (line.contains(" posts")) {
 					setBlinds(hand, line);
 				} else if (line.startsWith("Dealt to ")) {
 					setCards(hand, players, line);
 				} else if (line.contains("calls")) {
-					if (history.getHands() != null && history.getHands().size() >= 4) {
-						Log.e("", "");
-					}
-					setCall(hand, players, line, street);
+					setCall(hand, line, street);
 				} else if (line.contains("bets") || line.contains("raises")) {
-					setBetOrRaise(hand, players, line, street);
+					setBetOrRaise(hand, line, street);
 				} else if (line.contains("checks") || line.contains("folds")) {
-					setCheckOrFold(hand, players, line, street);
+					setCheckOrFold(hand, line, street);
 				} else if (line.contains("Uncalled bet")) {
 					setUncalledBet(hand, players, line, street);
 				} else if (line.contains("*** FLOP ***")) {
 					street = Street.FLOP;
 
                     assert players != null;
-                    Player board = players.get(BOARD).cloneObject();
+                    Player board = players.get(BOARD).clonePlayer();
 
 					String[] card = getCards(line);
 
@@ -88,7 +88,7 @@ public class HistoryReader {
 					street = Street.TURN;
 
                     assert players != null;
-                    Player board = players.get(BOARD).cloneObject();
+                    Player board = players.get(BOARD).clonePlayer();
 
 					String[] card = getCards(line);
 
@@ -102,7 +102,7 @@ public class HistoryReader {
 					street = Street.RIVER;
 
                     assert players != null;
-                    Player board = players.get(BOARD).cloneObject();
+                    Player board = players.get(BOARD).clonePlayer();
 					String[] card = getCards(line);
 
 					board.addCard(card[0]);
@@ -112,7 +112,7 @@ public class HistoryReader {
                     assert hand != null;
                     hand.addAction(action);
 				} else if (line.contains("shows")) {
-					showDown(hand, players, line, street);
+					showdown(hand, players, line, street);
 				} else if (line.contains("collected") && !line.contains("collected (")) {
 					getPot(hand, players, line, street);
 				}
@@ -140,51 +140,122 @@ public class HistoryReader {
 
 	private static void newHand(Hand hand, HashMap<String, Player> players, String line, History history) {
 		//TODO: colocar este método na classe PokerStarsReader
-		Player player = new Player(BOARD, 0, 0);
+		Player player = new Player(BOARD);
 		players.put(player.getName(), player);
 
-		int leftParenthesis = line.indexOf('(');
-		int rightParenthesis = line.indexOf(')');
-		int slash = line.indexOf('/');
+        setSmallAndBigBlind(hand, line);
 
-		int smallBlind = Integer.parseInt(line.substring(leftParenthesis + 1, slash));
-		int bigBlind = Integer.parseInt(line.substring(slash + 1, rightParenthesis));
+        setRoom(history, line);
+        setSession(history, line);
 
-		hand.setSmallBlind(smallBlind);
-		hand.setBigBlind(bigBlind);
+		setNumHand(hand, line);
+		setLimit(hand, line);
+        setGame(hand, line);
 
-		int roomIndex = line.indexOf(" Hand");
-		String room = line.substring(0, roomIndex);
-		//TODO: verificar a sala só na primeira vez
-		history.setRoom(room);
+        setTourney(history, line);
 
-		int startHandIndex = line.indexOf('#') + 1;
-		int endHandIndex = line.indexOf(':');
-		long numHand = Long.parseLong(line.substring(startHandIndex, endHandIndex));
-		hand.setHand(numHand);
-		//TODO: achar outra forma de pegar o torneio (a princípio se não tiver escrito Hold'em, lançar exceção pq histórico não poderá ser lido
-		if (line.contains("Hold'em")) {
-			hand.setGame("Texas Hold'em");
-		}
-		//TODO: abrir diferentes torneios para ver como aparece (Pot Limit, Fixed Limit)
-		if (line.contains("No Limit")) {
-			hand.setLimit(Limit.NO_LIMIT);
-		}
-		//TODO: pegar número do torneio só na primeira vez
-		int startIndexTourney = line.lastIndexOf('#') + 1;
-		int endIndexTourney = line.indexOf(',');
-		long tourney = Long.parseLong(line.substring(startIndexTourney, endIndexTourney));
-		history.setTourney(tourney);
+		setDate(hand, line);
 
-		int startIndexDate = line.indexOf('[') + 1;
-		int endIndexDate = line.trim().lastIndexOf(' ');
-		String data = line.substring(startIndexDate, endIndexDate);
-
-		Date date = formatDate(data);
-		hand.setDate(date);
-
-		// TODO: setar buy in e rake
+		setBuyIn(history, hand, line);
 	}
+
+    private static void setSession(History history, String line) {
+        if (history.getSession() == null) {
+            if (line.contains("Tournament")) {
+                history.setSession(Session.TOURNEY);
+            } else {
+                history.setSession(Session.RING);
+            }
+        }
+    }
+
+    private static void setBuyIn(History history, Hand hand, String line) {
+        if (history.getBuyIn() == null) {
+            int startIndex = line.indexOf(",") + 1;
+            int endIndex = line.indexOf(hand.getGame());
+
+            history.setBuyIn(line.substring(startIndex, endIndex).trim());
+        }
+    }
+
+    private static void setDate(Hand hand, String line) {
+        int startIndexDate = line.indexOf('[') + 1;
+        int endIndexDate = line.trim().lastIndexOf(' ');
+        String data = line.substring(startIndexDate, endIndexDate);
+
+        Date date = formatDate(data);
+        hand.setDate(date);
+    }
+
+    private static void setTourney(History history, String line) {
+        if (history.getTourney() == 0) {
+            int startIndexTourney = line.lastIndexOf('#') + 1;
+            int endIndexTourney = line.indexOf(',');
+            long tourney = Long.parseLong(line.substring(startIndexTourney, endIndexTourney));
+            history.setTourney(tourney);
+        }
+    }
+
+    private static void setLimit(Hand hand, String line) {
+        if (line.contains("No Limit")) {
+            hand.setLimit(Limit.NO_LIMIT);
+        } else if (line.contains("Pot Limit")) {
+            hand.setLimit(Limit.POT_LIMIT);
+        } else if (line.contains("Limit")) {
+            hand.setLimit(Limit.LIMIT);
+        }
+    }
+
+    private static void setGame(Hand hand, String line) {
+        int startIndex = line.indexOf("Hold'em");
+
+        if (startIndex < 0) {
+            startIndex = line.indexOf("Omaha");
+        }
+
+        String strLimit = null;
+        switch (hand.getLimit()) {
+            case NO_LIMIT:
+                strLimit = "No Limit";
+                break;
+            case LIMIT:
+                strLimit = "Limit";
+                break;
+            case POT_LIMIT:
+                strLimit = "Pot Limit";
+                break;
+        }
+
+        int endIndex = line.indexOf(strLimit);
+        hand.setGame(line.substring(startIndex, endIndex).trim());
+    }
+
+    private static void setNumHand(Hand hand, String line) {
+        int startHandIndex = line.indexOf('#') + 1;
+        int endHandIndex = line.indexOf(':');
+        long numHand = Long.parseLong(line.substring(startHandIndex, endHandIndex));
+        hand.setHand(numHand);
+    }
+
+    private static void setSmallAndBigBlind(Hand hand, String line) {
+        int leftParenthesis = line.indexOf('(');
+        int rightParenthesis = line.indexOf(')');
+        int slash = line.indexOf('/');
+
+        int smallBlind = Integer.parseInt(line.substring(leftParenthesis + 1, slash));
+        int bigBlind = Integer.parseInt(line.substring(slash + 1, rightParenthesis));
+
+        hand.setSmallBlind(smallBlind);
+        hand.setBigBlind(bigBlind);
+    }
+
+    private static void setRoom(History history, String line) {
+        if (history.getRoom() == null) {
+            int roomIndex = line.indexOf(" Hand");
+            String room = line.substring(0, roomIndex);
+            history.setRoom(room);
+        }
+    }
 
 	private static Date formatDate(String data) {
 		Date date;
@@ -199,20 +270,7 @@ public class HistoryReader {
 		return date;
 	}
 
-	private static void setTable(Hand hand, String line, History history) {
-
-		int initialIndexButton = line.indexOf("Seat #") + 6;
-		int finalIndexButton = line.indexOf(" is the button");
-		int button = Integer.parseInt(line.substring(initialIndexButton, finalIndexButton));
-		hand.setButton(button);
-
-		int finalIndexPlayers = line.indexOf("-max");
-		int initialIndexPlayers = line.substring(0, finalIndexPlayers).lastIndexOf(' ') + 1;
-
-		int numPlayers = Integer.parseInt(line.substring(initialIndexPlayers, finalIndexPlayers));
-
-		history.setNumPlayers(numPlayers);
-
+	private static void setTable(Hand hand, String line) {
 		int initialIndexTable = line.indexOf('\'') + 1;
 		initialIndexTable += line.substring(initialIndexTable).indexOf(' ') + 1;
 		int finalIndexTable = line.lastIndexOf('\'');
@@ -221,15 +279,35 @@ public class HistoryReader {
 		hand.setTable(Integer.parseInt(table));
 	}
 
+    private static void setNumPlayers(Hand hand, String line) {
+        int finalIndexPlayers = line.indexOf("-max");
+        int initialIndexPlayers = line.substring(0, finalIndexPlayers).lastIndexOf(' ') + 1;
+
+        int numPlayers = Integer.parseInt(line.substring(initialIndexPlayers, finalIndexPlayers));
+
+        hand.setNumPlayers(numPlayers);
+    }
+
+    private static void setButton(Hand hand, String line) {
+        int initialIndexButton = line.indexOf("Seat #") + 6;
+        int finalIndexButton = line.indexOf(" is the button");
+        int button = Integer.parseInt(line.substring(initialIndexButton, finalIndexButton));
+        hand.setButton(button);
+    }
+
 	private static void setChips(Hand hand, HashMap<String, Player> players, String line) {
 		int indexColon = line.indexOf(':');
 
 		int position = Integer.parseInt(line.substring(5, indexColon));
 
 		int finalIndex = line.lastIndexOf(" in chips)");
-		int leftParenthesis = line.substring(0, finalIndex).lastIndexOf('(');
+		int leftParenthesis = line.substring(0, finalIndex).lastIndexOf("($");//TODO: verificar outras moedas
 
-		int stack = Integer.parseInt(line.substring(leftParenthesis + 1, finalIndex));
+        if (leftParenthesis < 0) {
+            leftParenthesis = line.substring(0, finalIndex).lastIndexOf('(');
+        }
+
+		float stack = Float.parseFloat(line.substring(leftParenthesis + 1, finalIndex));
 
 		String name = line.substring(indexColon + 2, leftParenthesis - 1);
 
@@ -273,7 +351,6 @@ public class HistoryReader {
 		toCall = value;
 		Action action = new Action(player, value, actionID, street, pot, toCall);
 		hand.addAction(action);
-
 	}
 
 	private static void setCards(Hand hand, HashMap<String, Player> players, String line) {
@@ -283,7 +360,7 @@ public class HistoryReader {
 
 		String name = line.substring(9, finalIndex);
 
-		Player player = players.get(name).cloneObject();
+		Player player = players.get(name).clonePlayer();
         for (String card : cards) {
             player.addCard(card);
         }
@@ -292,14 +369,13 @@ public class HistoryReader {
 		hand.addAction(action);
 	}
 
-	private static void setBetOrRaise(Hand hand, HashMap<String, Player> players, String line, Street street) {
+	private static void setBetOrRaise(Hand hand, String line, Street street) {
 		int totalValue = getValue(line);
 		String name = getPlayerName(line);
-		ArrayList<Action> actions = hand.getActions();
-		int streetValue = getValueFromStreet(name, street, actions);
+		int streetValue = getValueFromStreet(name, street, hand.getActions());
 		int value = totalValue - streetValue;
 		toCall = totalValue;
-		setBetCallOrRaise(hand, players, line, street, value, totalValue);
+		setBetCallOrRaise(hand, hand.getPlayers(), line, street, value, totalValue);
 	}
 
 	private static void setBetCallOrRaise(Hand hand, HashMap<String, Player> players, String line, Street street, int value, int totalValue) {
@@ -317,17 +393,17 @@ public class HistoryReader {
 		hand.addAction(action);
 	}
 
-	private static void setCall(Hand hand, HashMap<String, Player> players, String line, Street street) {
+	private static void setCall(Hand hand, String line, Street street) {
 		int value = getValue(line);
 		String name = getPlayerName(line);
 		ArrayList<Action> actions = hand.getActions();
 		int streetValue = getValueFromStreet(name, street, actions);
 		int totalValue = value + streetValue;
-		setBetCallOrRaise(hand, players, line, street, value, totalValue);
+		setBetCallOrRaise(hand, hand.getPlayers(), line, street, value, totalValue);
 	}
 
-	private static void setCheckOrFold(Hand hand, HashMap<String, Player> players, String line, Street street) {
-		Player player = getClonedPlayer(line, players, 0);
+	private static void setCheckOrFold(Hand hand, String line, Street street) {
+		Player player = getClonedPlayer(line, hand.getPlayers(), 0);
 		ActionID actionID = ActionID.CHECK;
 
 		if (line.contains("folds")) {
@@ -345,7 +421,7 @@ public class HistoryReader {
 
 		int indexPlayer = line.indexOf("returned to") + 11;
 		String name = line.substring(indexPlayer).trim();
-		Player player = players.get(name).cloneObject();
+		Player player = players.get(name).clonePlayer();
 		player.setStack(player.getStack() + value);
 
 		ActionID actionID = ActionID.UNCALLED_BET;
@@ -359,7 +435,7 @@ public class HistoryReader {
 		int index = line.lastIndexOf(" collected");
 
 		String name = line.substring(0, index);
-		Player player = players.get(name).cloneObject();
+		Player player = players.get(name).clonePlayer();
 
 		int finalIndex = line.lastIndexOf(" from pot");
 
@@ -380,13 +456,14 @@ public class HistoryReader {
 		hand.addAction(action);
 	}
 
-	private static void showDown(Hand hand, HashMap<String, Player> players, String line, Street street) {
+	private static void showdown(Hand hand, HashMap<String, Player> players, String line, Street street) {
 		Player player = getClonedPlayer(line, players, 0);
 		String[] card = getCards(line);
 		try {
 			player.addCard(card[0]);
 			player.addCard(card[1]);//TODO: verificar o porquê do showdown não estar sendo adicionado à lista
 		} catch (Exception e) {
+			e.printStackTrace();
 			Log.e("Erro", "Erro " + line);
 		}
 		ActionID actionID = ActionID.SHOW_DOWN;
@@ -418,18 +495,10 @@ public class HistoryReader {
 
 	private static Player getClonedPlayer(String line, HashMap<String, Player> players, int value) {
 		String name = getPlayerName(line);
+        Player player =  players.get(name);
+        player.decreaseStack(value);
 
-		Player player = null;
-		try {
-			player = players.get(name).cloneObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-        assert player != null;
-        player.setStack(player.getStack() - value);
-
-		return player;
+		return player.clonePlayer();
 	}
 
 	private static String getPlayerName(String line) {

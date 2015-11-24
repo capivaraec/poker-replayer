@@ -26,7 +26,7 @@ public class HandInfo extends LinearLayout {
     private Context context;
 
     private enum Info {
-        BLINDS(0, "Blind"), POT(1, "Pot"), POT_ODDS(2, "Pot odds"), HAND(3, "Hand"), TABLE(4, "Table"), GAME(5, "Game"), DATE(6, "Date");
+        BLINDS(0, "Blind"), POT(1, "Pot"), POT_ODDS(2, "Pot odds"), HAND(3, "Hand"), TABLE(4, "Table"), GAME(5, "Game"), BUY_IN(6, "Buy-in"), DATE(7, "Date");
 
         private final int value;
         private final String title;
