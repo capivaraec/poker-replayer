@@ -17,6 +17,8 @@ import java.util.TimerTask;
 
 public class LayoutPlayer extends LinearLayout {
 
+    private final String allIn = "All in";
+    private String name;
     private final TextView tvName;
     private final TextView tvStack;
     private final Context context;
@@ -34,9 +36,14 @@ public class LayoutPlayer extends LinearLayout {
 
     public void setName(String name) {
         tvName.setText(name);
+        this.name = name;
     }
 
     public void setStack(float stack) {//TODO: verificar se é cash e colocar a moeda correta (dólar, euro etc)
+        if (stack == 0) {
+            setStack(allIn);
+            return;
+        }
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         String strStack = "$ " + decimalFormat.format(stack);
         tvStack.setText(strStack);
@@ -47,43 +54,48 @@ public class LayoutPlayer extends LinearLayout {
     }
 
     private void changeAction(String action) {
-        String name = tvName.getText().toString();
         tvName.setText(action);
         tvName.setTextColor(Color.BLUE);
 
         Timer timer = new Timer();
-        timer.schedule(new ActionTask(name, tvName), 1000);
+        timer.schedule(new ActionTask(tvName), 1000);
     }
 
     public void setAction(ActionID action) {
         String strAction = null;
-        boolean up = true;
 
         switch (action) {
+            case CHECK:
+                strAction = "Check";
+                break;
             case BET:
+            case BET_ALL_IN:
                 strAction = "Bet";
                 break;
             case RAISE:
+            case RAISE_ALL_IN:
                 strAction = "Raise";
                 break;
             case CALL:
+            case CALL_ALL_IN:
                 strAction = "Call";
                 break;
             case FOLD:
                 strAction = "Fold";
                 break;
+        }
+
+        switch (action) {
             case ALL_IN:
-                strAction = "All in";
-                up = false;
+            case BET_ALL_IN:
+            case RAISE_ALL_IN:
+            case CALL_ALL_IN:
+                setStack(allIn);
                 break;
         }
 
         if (strAction != null) {
-            if (up) {
-                changeAction(strAction);
-            } else {
-                setStack(strAction);
-            }
+            changeAction(strAction);
         }
 
         // check, call, fold, raise -> azul em cima
@@ -92,11 +104,9 @@ public class LayoutPlayer extends LinearLayout {
 
     private class ActionTask extends TimerTask {
 
-        private String playerName;
         private TextView textView;
 
-        public ActionTask(String playerName, TextView textView) {
-            this.playerName = playerName;
+        public ActionTask(TextView textView) {
             this.textView = textView;
         }
 
@@ -106,7 +116,7 @@ public class LayoutPlayer extends LinearLayout {
 
                 @Override
                 public void run() {
-                    textView.setText(playerName);
+                    textView.setText(name);
                     textView.setTextColor(Color.BLACK);
                 }
             });
