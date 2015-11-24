@@ -42,7 +42,7 @@ public class Cache {
         SharedPreferences.Editor editor = settings.edit();
 
         editor.putInt(CURRENT_HAND, hand);
-        editor.commit();
+        editor.apply();
     }
 
     public static int getCurrentHand(Context context) {
@@ -55,7 +55,7 @@ public class Cache {
         SharedPreferences.Editor editor = settings.edit();
 
         editor.putString(FILE_PATH, path);
-        editor.commit();
+        editor.apply();
     }
 
     public static String getFilePath(Context context) {

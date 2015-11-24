@@ -67,7 +67,7 @@ public class Player implements Serializable {
         stack -= value;
     }
 
-    protected Player clonePlayer() {
+    Player clonePlayer() {
         return new Player(name, cards, position, stack);
     }
 }

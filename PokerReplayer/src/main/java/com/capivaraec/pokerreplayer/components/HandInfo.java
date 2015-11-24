@@ -20,17 +20,17 @@ public class HandInfo extends LinearLayout {
 
     private final ListView listView;
     private HandInfoAdapter adapter;
-    private ArrayList <HashMap<String, String>> list = new ArrayList<>();
+    private final ArrayList <HashMap<String, String>> list = new ArrayList<>();
     private int index;
     private int top;
-    private Context context;
+    private final Context context;
 
     private enum Info {
         BLINDS(0, "Blind"), POT(1, "Pot"), POT_ODDS(2, "Pot odds"), HAND(3, "Hand"), TABLE(4, "Table"), GAME(5, "Game"), BUY_IN(6, "Buy-in"), DATE(7, "Date");
 
         private final int value;
         private final String title;
-        private Info(int value, String title) {
+        Info(int value, String title) {
             this.value = value;
             this.title = title;
         }
@@ -94,7 +94,7 @@ public class HandInfo extends LinearLayout {
         StringBuilder blinds = new StringBuilder(decimalFormat.format(smallBlind) + "/" + decimalFormat.format(bigBlind));
 
         if (ante > 0) {
-            blinds.append(" (+" + decimalFormat.format(ante) + ")");
+            blinds.append(" (+").append(decimalFormat.format(ante)).append(")");
         }
 
         HashMap<String, String> hashMap = list.get(Info.BLINDS.getValue());

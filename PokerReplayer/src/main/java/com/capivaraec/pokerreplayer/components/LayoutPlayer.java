@@ -104,7 +104,7 @@ public class LayoutPlayer extends LinearLayout {
 
     private class ActionTask extends TimerTask {
 
-        private TextView textView;
+        private final TextView textView;
 
         public ActionTask(TextView textView) {
             this.textView = textView;

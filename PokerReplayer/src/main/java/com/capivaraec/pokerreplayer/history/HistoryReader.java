@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
-import android.util.Log;
+
 import com.capivaraec.pokerreplayer.enums.ActionID;
 import com.capivaraec.pokerreplayer.enums.Limit;
 import com.capivaraec.pokerreplayer.enums.Session;
@@ -82,7 +82,6 @@ public class HistoryReader {
 
 					toCall = 0;
 					Action action = new Action(board, 0, ActionID.FLOP, street, pot, toCall);
-                    assert hand != null;
                     hand.addAction(action);
 				} else if (line.contains("*** TURN ***")) {
 					street = Street.TURN;
@@ -96,7 +95,6 @@ public class HistoryReader {
 
 					toCall = 0;
 					Action action = new Action(board, 0, ActionID.TURN, street, pot, toCall);
-                    assert hand != null;
                     hand.addAction(action);
 				} else if (line.contains("*** RIVER ***")) {
 					street = Street.RIVER;
@@ -109,7 +107,6 @@ public class HistoryReader {
 
 					toCall = 0;
 					Action action = new Action(board, 0, ActionID.RIVER, street, pot, toCall);
-                    assert hand != null;
                     hand.addAction(action);
 				} else if (line.contains("shows")) {
 					showdown(hand, line, street);
@@ -472,7 +469,7 @@ public class HistoryReader {
             player.addCard(card);
         }
 
-		ActionID actionID = ActionID.SHOW_DOWN;
+		ActionID actionID = ActionID.SHOWDOWN;
 
 		toCall = 0;
 		Action action = new Action( player, 0, actionID, street, pot, toCall);

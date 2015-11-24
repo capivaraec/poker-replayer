@@ -13,13 +13,10 @@ import com.capivaraec.pokerreplayer.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by marcelobogdanovicz on 11/22/15.
- */
-public class HandInfoAdapter extends ArrayAdapter<HashMap<String, String>> {
+class HandInfoAdapter extends ArrayAdapter<HashMap<String, String>> {
 
-    private Context context;
-    private ArrayList<HashMap<String, String>> list;
+    private final Context context;
+    private final ArrayList<HashMap<String, String>> list;
 
     public HandInfoAdapter(Context context, ArrayList<HashMap<String, String>> list) {
         super(context, R.layout.hand_info_item, list);

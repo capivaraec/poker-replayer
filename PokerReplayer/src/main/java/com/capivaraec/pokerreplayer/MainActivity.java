@@ -28,6 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@SuppressWarnings("UnusedParameters")
 public class MainActivity extends AppCompatActivity {
 
     private static final int DBX_CHOOSER_REQUEST = 0;
