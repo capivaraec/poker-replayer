@@ -22,6 +22,7 @@ public class LayoutPlayer extends LinearLayout {
     private final TextView tvName;
     private final TextView tvStack;
     private final Context context;
+    private String currency = "$";
 
     public LayoutPlayer(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,12 +46,16 @@ public class LayoutPlayer extends LinearLayout {
             return;
         }
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        String strStack = "$ " + decimalFormat.format(stack);
+        String strStack = currency + " " + decimalFormat.format(stack);
         tvStack.setText(strStack);
     }
 
     private void setStack(String text) {
         tvStack.setText(text);
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     private void changeAction(String action) {

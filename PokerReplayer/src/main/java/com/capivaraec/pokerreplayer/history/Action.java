@@ -8,19 +8,36 @@ import com.capivaraec.pokerreplayer.enums.Street;
 public class Action implements Serializable {
 
 	private Player player;
-	private int value;
+	private float value;
 	private ActionID actionID;
 	private Street street;
-	private int pot;
-	private int toCall;
+	private float pot;
+	private float totalToCall;
+    private float valueSpent;
 
-	public Action(Player player, int value, ActionID actionID, Street street, int pot, int toCall) {
+	public Action(Player player, float value, ActionID actionID, Street street, float pot, float totalToCall, float valueSpent) {
 		this.player = player;
 		this.value = value;
 		this.actionID = actionID;
 		this.street = street;
 		this.pot = pot;
-		this.toCall = toCall;
+		this.totalToCall = totalToCall;
+        this.valueSpent = valueSpent;
+	}
+
+    public Action(Player player, ActionID actionID, Street street, float pot, float totalToCall) {
+        this.player = player;
+        this.actionID = actionID;
+        this.street = street;
+        this.pot = pot;
+        this.totalToCall = totalToCall;
+    }
+
+	public Action(Player player, ActionID actionID, Street street, float pot) {
+		this.player = player;
+		this.actionID = actionID;
+		this.street = street;
+		this.pot = pot;
 	}
 
 	public Player getPlayer() {
@@ -31,11 +48,11 @@ public class Action implements Serializable {
 		this.player = player;
 	}
 
-	public int getValue() {
+	public float getValue() {
 		return value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(float value) {
 		this.value = value;
 	}
 
@@ -55,20 +72,24 @@ public class Action implements Serializable {
 		this.street = street;
 	}
 
-	public int getPot() {
+	public float getPot() {
 		return pot;
 	}
 
-	public void setPot(int pot) {
+	public void setPot(float pot) {
 		this.pot = pot;
 	}
 
-	public int getToCall() {
-		return toCall;
+	public float getTotalToCall() {
+		return totalToCall;
 	}
 
-	public void setToCall(int toCall) {
-		this.toCall = toCall;
+	public void setTotalToCall(float totalToCall) {
+		this.totalToCall = totalToCall;
 	}
+
+    public float getValueSpent() {
+        return valueSpent;
+    }
 
 }

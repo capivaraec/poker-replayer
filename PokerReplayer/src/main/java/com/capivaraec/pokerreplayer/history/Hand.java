@@ -8,33 +8,33 @@ import com.capivaraec.pokerreplayer.enums.Limit;
 
 public class Hand implements Serializable {
 
-	private int smallBlind;
-	private int bigBlind;
+	private float smallBlind;
+	private float bigBlind;
 	private int button;
 	private Limit limit;
-	private int table;
+	private String table;
 	private String game;
-	private int ante;
+	private float ante;
 	private ArrayList<Action> actions;
-	private int pot;
+	private float pot;
 	private long hand;
 	private Date date;
 	private HashMap<String, Player> players;
 	private int numPlayers;
 
-	public int getSmallBlind() {
+	public float getSmallBlind() {
 		return smallBlind;
 	}
 
-	public void setSmallBlind(int smallBlind) {
+	public void setSmallBlind(float smallBlind) {
 		this.smallBlind = smallBlind;
 	}
 
-	public int getBigBlind() {
+	public float getBigBlind() {
 		return bigBlind;
 	}
 
-	public void setBigBlind(int bigBlind) {
+	public void setBigBlind(float bigBlind) {
 		this.bigBlind = bigBlind;
 	}
 
@@ -54,11 +54,11 @@ public class Hand implements Serializable {
 		this.limit = limit;
 	}
 
-	public int getTable() {
+	public String getTable() {
 		return table;
 	}
 
-	public void setTable(int table) {
+	public void setTable(String table) {
 		this.table = table;
 	}
 
@@ -70,11 +70,11 @@ public class Hand implements Serializable {
 		this.game = game;
 	}
 
-	public int getAnte() {
+	public float getAnte() {
 		return ante;
 	}
 
-	public void setAnte(int ante) {
+	public void setAnte(float ante) {
 		this.ante = ante;
 	}
 
@@ -102,11 +102,11 @@ public class Hand implements Serializable {
 		return actions.get(index);
 	}
 
-	public int getPot() {
+	public float getPot() {
 		return pot;
 	}
 
-	public void setPot(int pot) {
+	public void setPot(float pot) {
 		this.pot = pot;
 	}
 

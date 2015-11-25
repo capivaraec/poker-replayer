@@ -8,12 +8,8 @@ int anim abc_slide_in_bottom 0x7f050006
 int anim abc_slide_in_top 0x7f050007
 int anim abc_slide_out_bottom 0x7f050008
 int anim abc_slide_out_top 0x7f050009
-int anim card_flip_left_in 0x7f05000a
-int anim card_flip_left_out 0x7f05000b
-int anim card_flip_right_in 0x7f05000c
-int anim card_flip_right_out 0x7f05000d
-int anim popup_hide 0x7f05000e
-int anim popup_show 0x7f05000f
+int anim popup_hide 0x7f05000a
+int anim popup_show 0x7f05000b
 int attr actionBarDivider 0x7f010063
 int attr actionBarItemBackground 0x7f010064
 int attr actionBarPopupTheme 0x7f01005d

@@ -22,8 +22,8 @@ public class HistoryReader {
 
 	private static final String BOARD = "Board";
 	private static final String ALL_IN = " and is all-in";
-	private static int pot = 0;
-	private static int toCall = 0;
+	private static float pot = 0;
+    private static float totalToCall = 0;
 
 	public static History readFile(File file) {
 
@@ -49,6 +49,7 @@ public class HistoryReader {
 					players = new HashMap<>();
 					street = Street.PRE_FLOP;
 					pot = 0;
+                    totalToCall = 0;
 					newHand(hand, players, line, history);
 				} else if (line.startsWith("Table")) {
                     setButton(hand, line);
@@ -70,7 +71,7 @@ public class HistoryReader {
 					setUncalledBet(hand, line, street);
 				} else if (line.contains("*** FLOP ***")) {
 					street = Street.FLOP;
-
+                    totalToCall = 0;
                     assert players != null;
                     Player board = players.get(BOARD).clonePlayer();
 
@@ -80,12 +81,11 @@ public class HistoryReader {
 					board.addCard(card[1]);
 					board.addCard(card[2]);
 
-					toCall = 0;
-					Action action = new Action(board, 0, ActionID.FLOP, street, pot, toCall);
+					Action action = new Action(board, ActionID.FLOP, street, pot);
                     hand.addAction(action);
 				} else if (line.contains("*** TURN ***")) {
 					street = Street.TURN;
-
+                    totalToCall = 0;
                     assert players != null;
                     Player board = players.get(BOARD).clonePlayer();
 
@@ -93,20 +93,18 @@ public class HistoryReader {
 
 					board.addCard(card[0]);
 
-					toCall = 0;
-					Action action = new Action(board, 0, ActionID.TURN, street, pot, toCall);
+					Action action = new Action(board, ActionID.TURN, street, pot);
                     hand.addAction(action);
 				} else if (line.contains("*** RIVER ***")) {
 					street = Street.RIVER;
-
+                    totalToCall = 0;
                     assert players != null;
                     Player board = players.get(BOARD).clonePlayer();
 					String[] card = getCards(line);
 
 					board.addCard(card[0]);
 
-					toCall = 0;
-					Action action = new Action(board, 0, ActionID.RIVER, street, pot, toCall);
+					Action action = new Action(board, ActionID.RIVER, street, pot);
                     hand.addAction(action);
 				} else if (line.contains("shows")) {
 					showdown(hand, line, street);
@@ -269,11 +267,10 @@ public class HistoryReader {
 
 	private static void setTable(Hand hand, String line) {
 		int initialIndexTable = line.indexOf('\'') + 1;
-		initialIndexTable += line.substring(initialIndexTable).indexOf(' ') + 1;
 		int finalIndexTable = line.lastIndexOf('\'');
 		String table = line.substring(initialIndexTable, finalIndexTable);
 
-		hand.setTable(Integer.parseInt(table));
+		hand.setTable(table);
 	}
 
     private static void setNumPlayers(Hand hand, String line) {
@@ -322,23 +319,23 @@ public class HistoryReader {
 	}
 
 	private static void setBlinds(Hand hand, String line) {
-		int value = getValue(line);
-
-		Player player = getClonedPlayer(line, hand.getPlayers(), value);
+		float value = getValue(line);
 
 		ActionID actionID;
-
 		Street street = Street.PRE_FLOP;
 
 		if (line.contains(" small blind ")) {
 			actionID = ActionID.SMALL_BLIND;
 		} else if (line.contains(" big blind ")) {
 			actionID = ActionID.BIG_BLIND;
+            totalToCall = value;
 		} else {
 			actionID = ActionID.ANTE;
 			street = Street.ANTE;
 			hand.setAnte(value);
 		}
+
+        Player player = getClonedPlayer(line, hand.getPlayers(), value);
 
 		pot += value;
 
@@ -346,8 +343,7 @@ public class HistoryReader {
 			actionID = ActionID.ALL_IN;
 		}
 
-		toCall = value;
-		Action action = new Action(player, value, actionID, street, pot, toCall);
+		Action action = new Action(player, value, actionID, street, pot, totalToCall, 0);
 		hand.addAction(action);
 	}
 
@@ -363,20 +359,21 @@ public class HistoryReader {
             player.addCard(card);
         }
 
-		Action action = new Action(player, 0, ActionID.HOLE_CARDS, Street.PRE_FLOP, pot, toCall);
+		Action action = new Action(player, ActionID.HOLE_CARDS, Street.PRE_FLOP, pot, totalToCall);
 		hand.addAction(action);
 	}
 
 	private static void setBetOrRaise(Hand hand, String line, Street street) {
-		int totalValue = getValue(line);
+		float totalValue = getValue(line);
 		String name = getPlayerName(line);
-		int streetValue = getValueFromStreet(name, street, hand.getActions());
-		int value = totalValue - streetValue;
-		toCall = totalValue;
-		setBetCallOrRaise(hand, hand.getPlayers(), line, street, value, totalValue);
+		float streetValue = getValueFromStreet(name, street, hand.getActions());
+		float value = totalValue - streetValue;
+        totalToCall = totalValue;
+
+		setBetCallOrRaise(hand, hand.getPlayers(), line, street, value, totalValue, streetValue);
 	}
 
-	private static void setBetCallOrRaise(Hand hand, HashMap<String, Player> players, String line, Street street, int value, int totalValue) {
+	private static void setBetCallOrRaise(Hand hand, HashMap<String, Player> players, String line, Street street, float value, float totalValue, float streetValue) {
 		Player player = getClonedPlayer(line, players, value);
 		ActionID actionID = ActionID.CALL;
 
@@ -394,17 +391,17 @@ public class HistoryReader {
             actionID = ActionID.CALL_ALL_IN;
         }
 		pot += value;
-		Action action = new Action(player, totalValue, actionID, street, pot, toCall);
+		Action action = new Action(player, totalValue, actionID, street, pot, totalToCall, streetValue);
 		hand.addAction(action);
 	}
 
 	private static void setCall(Hand hand, String line, Street street) {
-		int value = getValue(line);
+		float value = getValue(line);
 		String name = getPlayerName(line);
 		ArrayList<Action> actions = hand.getActions();
-		int streetValue = getValueFromStreet(name, street, actions);
-		int totalValue = value + streetValue;
-		setBetCallOrRaise(hand, hand.getPlayers(), line, street, value, totalValue);
+		float streetValue = getValueFromStreet(name, street, actions);
+		float totalValue = value + streetValue;
+		setBetCallOrRaise(hand, hand.getPlayers(), line, street, value, totalValue, streetValue);
 	}
 
 	private static void setCheckOrFold(Hand hand, String line, Street street) {
@@ -415,7 +412,9 @@ public class HistoryReader {
 			actionID = ActionID.FOLD;
 		}
 
-		Action action = new Action(player, 0, actionID, street, pot, toCall);
+        float streetValue = getValueFromStreet(player.getName(), street, hand.getActions());
+
+		Action action = new Action(player, 0, actionID, street, pot, totalToCall, streetValue);
 		hand.addAction(action);
 	}
 
@@ -431,8 +430,8 @@ public class HistoryReader {
 
 		ActionID actionID = ActionID.UNCALLED_BET;
 		pot -= value;
-		toCall = 0;
-		Action action = new Action(player.clonePlayer(), value, actionID, street, pot, toCall);
+
+		Action action = new Action(player.clonePlayer(), value, actionID, street, pot, 0, 0);
 		hand.addAction(action);
 	}
 
@@ -456,8 +455,7 @@ public class HistoryReader {
 
 		ActionID actionID = ActionID.COLLECTED;
 
-		toCall = 0;
-		Action action = new Action(player.clonePlayer(), value, actionID, street, value, toCall);
+		Action action = new Action(player.clonePlayer(), value, actionID, street, pot, 0, 0);
 		hand.addAction(action);
 	}
 
@@ -470,9 +468,7 @@ public class HistoryReader {
         }
 
 		ActionID actionID = ActionID.SHOWDOWN;
-
-		toCall = 0;
-		Action action = new Action( player, 0, actionID, street, pot, toCall);
+		Action action = new Action( player, actionID, street, pot);
 
 		for (int x = hand.getActions().size() - 1; x >= 0; x--) {
 			Action act = hand.getAction(x);
@@ -494,7 +490,7 @@ public class HistoryReader {
 
 	}
 
-	private static int getValue(String line) {
+	private static float getValue(String line) {
 		line = line.trim();
 
 		if (line.endsWith(ALL_IN)) {
@@ -503,10 +499,10 @@ public class HistoryReader {
 
 		int index = line.lastIndexOf(' ') + 1;
 
-		return Integer.parseInt(line.substring(index));
+		return Float.parseFloat(line.substring(index));
 	}
 
-	private static Player getClonedPlayer(String line, HashMap<String, Player> players, int value) {
+	private static Player getClonedPlayer(String line, HashMap<String, Player> players, float value) {
 		String name = getPlayerName(line);
         Player player =  players.get(name);
         player.decreaseStack(value);
@@ -529,17 +525,18 @@ public class HistoryReader {
 		return cards.split(" ");
 	}
 
-	private static int getValueFromStreet(String name, Street street, ArrayList<Action> actions) {
-		int totalValue = 0;
+	private static float getValueFromStreet(String name, Street street, ArrayList<Action> actions) {
+		float totalValue = 0;
 
 		int actionSize = actions.size();
 		for (int x = actionSize - 1; x >= 0; x--) {
-			if (actions.get(x).getStreet() != street) {
+            Action action = actions.get(x);
+			if (action.getStreet() != street) {
 				break;
 			}
-			if (actions.get(x).getPlayer().getName().equals(name)) {
+			if (action.getPlayer().getName().equals(name) && action.getActionID() != ActionID.HOLE_CARDS) {
 				totalValue = actions.get(x).getValue();
-				break;
+                break;
 			}
 		}
 

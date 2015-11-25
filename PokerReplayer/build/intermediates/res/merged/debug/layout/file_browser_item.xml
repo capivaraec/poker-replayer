@@ -9,7 +9,7 @@
         android:layout_width="@dimen/file_image_size"
         android:layout_height="@dimen/file_image_size"
         android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/file_image_size"
+        android:layout_margin="@dimen/file_image_margin"
         android:contentDescription="@string/image_icon_description"/>
 
     <TextView

@@ -1,5 +1,7 @@
 package com.capivaraec.pokerreplayer.history;
 
+import com.capivaraec.pokerreplayer.enums.Street;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

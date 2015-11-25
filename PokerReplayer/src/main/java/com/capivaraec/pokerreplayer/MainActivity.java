@@ -185,14 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         history = HistoryReader.readFile(file);
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress.dismiss();
-                                newHistory();
-                            }
-                        });
+                        newHistory();
                     }
                 };
 
@@ -205,7 +198,13 @@ public class MainActivity extends AppCompatActivity {
         if (history != null) {
             Cache.writeHistory(this, file, history);
         }
-        recreate();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                recreate();
+                progress.dismiss();
+            }
+        });
     }
 
     private void readHand() {
@@ -225,10 +224,11 @@ public class MainActivity extends AppCompatActivity {
         handInfo.setDate(hand.getDate());
         handInfo.setHandNumber(currentHand, history.getHands().size());
         handInfo.setTable(hand.getTable());
-        handInfo.updateAdapter();
+        handInfo.setBuyIn(history.getBuyIn());
 
         setPlayers(hand.getPlayers());
         putBlindsAndAntes(hand);
+        setPotOdds();
     }
 
     private void putBlindsAndAntes(Hand hand) {
@@ -286,6 +286,30 @@ public class MainActivity extends AppCompatActivity {
 
         players[position].setStack(player.getStack());
         players[position].setAction(action.getActionID());
+
+        setPotOdds();
+    }
+
+    private void setPotOdds() {
+        Hand hand = history.getHand(currentHand);
+        Action action = hand.getAction(currentAction);
+        String name = null;
+        float valueSpent = 0;
+        float totalToCall = action.getTotalToCall();
+
+        if (currentAction < hand.getActions().size() - 1) {
+            Action nextAction = hand.getAction(currentAction + 1);
+            name = nextAction.getPlayer().getName();
+            valueSpent = nextAction.getValueSpent();
+            if (nextAction.getPlayer().getPosition() == 0 || nextAction.getActionID() == ActionID.UNCALLED_BET || nextAction.getActionID() == ActionID.SHOWDOWN) {//TODO: estudar todos os casos onde não se deve mais mostrar os pot odds (uncalled bet, showdown etc)
+                name = null;
+            } else if (totalToCall > nextAction.getPlayer().getStack() + valueSpent) {
+                totalToCall = nextAction.getPlayer().getStack() + valueSpent;
+            }
+        }
+
+        handInfo.setPotOdds(action.getPot(), name, totalToCall, valueSpent);
+        handInfo.updateAdapter();
     }
 
     private void setButtonsEnabled() {
