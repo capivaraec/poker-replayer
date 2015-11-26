@@ -8,7 +8,7 @@
     <dimen name="player_horizontal_margin">60dp</dimen>
     <dimen name="player_vertical_margin">25dp</dimen>
     <dimen name="player_width">195dp</dimen>
-    <dimen name="player_height">60dp</dimen>
+    <dimen name="player_height">61dp</dimen>
     <dimen name="player_padding">2dp</dimen>
     <dimen name="player_margin">8dp</dimen>
     <dimen name="player_name_margin">3dp</dimen>
