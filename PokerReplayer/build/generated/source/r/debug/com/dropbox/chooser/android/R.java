@@ -66,27 +66,27 @@ public final class R {
 		public static final int ss_passwordStrengthMeterLit = 0x7f0b0071;
 		public static final int ss_passwordStrengthMeterUnlit = 0x7f0b0072;
 		public static final int ss_passwordStrengthText = 0x7f0b0073;
-		public static final int statusBarSeparator = 0x7f0b0074;
-		public static final int text = 0x7f0b0079;
-		public static final int textFieldStroke = 0x7f0b007a;
-		public static final int textHighlight = 0x7f0b007b;
-		public static final int titleBarText = 0x7f0b007c;
-		public static final int titleBarTextWhite = 0x7f0b007d;
-		public static final int tourBoxText = 0x7f0b007e;
-		public static final int tourGrayBorder = 0x7f0b007f;
-		public static final int tourText = 0x7f0b0080;
-		public static final int tourTitleText = 0x7f0b0081;
-		public static final int translucentBlackBackground = 0x7f0b0082;
-		public static final int translucentFileListMediumGrayText = 0x7f0b0083;
-		public static final int translucentWhiteBackground = 0x7f0b0084;
-		public static final int translucentWhiteText = 0x7f0b0085;
-		public static final int videoIconDetailsBackground = 0x7f0b0086;
-		public static final int whiteBackground = 0x7f0b0087;
-		public static final int whiteText = 0x7f0b0088;
+		public static final int statusBarSeparator = 0x7f0b0075;
+		public static final int text = 0x7f0b007a;
+		public static final int textFieldStroke = 0x7f0b007b;
+		public static final int textHighlight = 0x7f0b007c;
+		public static final int titleBarText = 0x7f0b007d;
+		public static final int titleBarTextWhite = 0x7f0b007e;
+		public static final int tourBoxText = 0x7f0b007f;
+		public static final int tourGrayBorder = 0x7f0b0080;
+		public static final int tourText = 0x7f0b0081;
+		public static final int tourTitleText = 0x7f0b0082;
+		public static final int translucentBlackBackground = 0x7f0b0083;
+		public static final int translucentFileListMediumGrayText = 0x7f0b0084;
+		public static final int translucentWhiteBackground = 0x7f0b0085;
+		public static final int translucentWhiteText = 0x7f0b0086;
+		public static final int videoIconDetailsBackground = 0x7f0b0087;
+		public static final int whiteBackground = 0x7f0b0088;
+		public static final int whiteText = 0x7f0b0089;
 	}
 	public static final class dimen {
-		public static final int appStoreInterstitialMargin = 0x7f08005c;
-		public static final int buttonTextSize = 0x7f08005d;
+		public static final int appStoreInterstitialMargin = 0x7f08005d;
+		public static final int buttonTextSize = 0x7f08005e;
 		public static final int dbx_action_bar_default_height = 0x7f080005;
 		public static final int dbx_action_bar_icon_vertical_padding = 0x7f080006;
 		public static final int dbx_action_bar_subtitle_bottom_margin = 0x7f080007;
@@ -94,21 +94,21 @@ public final class R {
 		public static final int dbx_action_bar_subtitle_top_margin = 0x7f080009;
 		public static final int dbx_action_bar_title_text_size = 0x7f08000a;
 		public static final int dbx_action_button_min_width = 0x7f08000b;
-		public static final int dbx_dialog_min_width_major = 0x7f080028;
-		public static final int dbx_dialog_min_width_minor = 0x7f080029;
-		public static final int dbx_dropdownitem_icon_width = 0x7f08005e;
-		public static final int dbx_dropdownitem_text_padding_left = 0x7f08005f;
-		public static final int dbx_dropdownitem_text_padding_right = 0x7f080060;
-		public static final int dbx_search_view_preferred_width = 0x7f080061;
-		public static final int dbx_search_view_text_min_width = 0x7f080062;
-		public static final int fileChooserButtonLeft = 0x7f080065;
-		public static final int fileChooserButtonRight = 0x7f080066;
-		public static final int fileChooserButtonsPadding = 0x7f080067;
-		public static final int fileChooserPaddingBottom = 0x7f080068;
-		public static final int fileChooserPaddingLeft = 0x7f080069;
-		public static final int fileChooserPaddingRight = 0x7f08006a;
-		public static final int fileChooserPaddingTop = 0x7f08006b;
-		public static final int fileChooserTitleText = 0x7f08006c;
+		public static final int dbx_dialog_min_width_major = 0x7f080029;
+		public static final int dbx_dialog_min_width_minor = 0x7f08002a;
+		public static final int dbx_dropdownitem_icon_width = 0x7f08005f;
+		public static final int dbx_dropdownitem_text_padding_left = 0x7f080060;
+		public static final int dbx_dropdownitem_text_padding_right = 0x7f080061;
+		public static final int dbx_search_view_preferred_width = 0x7f080062;
+		public static final int dbx_search_view_text_min_width = 0x7f080063;
+		public static final int fileChooserButtonLeft = 0x7f080066;
+		public static final int fileChooserButtonRight = 0x7f080067;
+		public static final int fileChooserButtonsPadding = 0x7f080068;
+		public static final int fileChooserPaddingBottom = 0x7f080069;
+		public static final int fileChooserPaddingLeft = 0x7f08006a;
+		public static final int fileChooserPaddingRight = 0x7f08006b;
+		public static final int fileChooserPaddingTop = 0x7f08006c;
+		public static final int fileChooserTitleText = 0x7f08006d;
 	}
 	public static final class drawable {
 		public static final int common_bar_light_gray_bottom = 0x7f020046;
@@ -124,8 +124,8 @@ public final class R {
 		public static final int common_button_light_gray = 0x7f020050;
 		public static final int ic_launcher = 0x7f020053;
 		public static final int icon_new = 0x7f020054;
-		public static final int tab_dropbox = 0x7f020056;
-		public static final int tab_dropbox_inactive = 0x7f020057;
+		public static final int tab_dropbox = 0x7f020057;
+		public static final int tab_dropbox_inactive = 0x7f020058;
 	}
 	public static final class id {
 		public static final int dbx_bottom_bar = 0x7f0c006c;

@@ -208,6 +208,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readHand() {
+        currentAction = 0;
+        Cache.setCurrentHand(this, currentHand);
+
         setButtonsEnabled();
         Hand hand = history.getHand(currentHand);
         clearTable();
@@ -337,9 +340,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void previousHand(View v) {
         currentHand--;
-        currentAction = 0;
 
-        Cache.setCurrentHand(this, currentHand);
         readHand();
     }
 
@@ -355,9 +356,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextHand(View v) {
         currentHand++;
-        currentAction = 0;
 
-        Cache.setCurrentHand(this, currentHand);
         readHand();
     }
 

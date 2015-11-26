@@ -60,7 +60,7 @@ public class LayoutPlayer extends LinearLayout {
 
     private void changeAction(String action) {
         tvName.setText(action);
-        tvName.setTextColor(Color.BLUE);
+        tvName.setTextColor(Color.YELLOW);
 
         Timer timer = new Timer();
         timer.schedule(new ActionTask(tvName), 1000);
@@ -122,7 +122,7 @@ public class LayoutPlayer extends LinearLayout {
                 @Override
                 public void run() {
                     textView.setText(name);
-                    textView.setTextColor(Color.BLACK);
+                    textView.setTextColor(Color.WHITE);
                 }
             });
         }

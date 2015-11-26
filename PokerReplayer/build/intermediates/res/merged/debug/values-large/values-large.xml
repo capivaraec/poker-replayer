@@ -27,6 +27,7 @@
     <dimen name="player_image_width">48dp</dimen>
     <dimen name="player_line_height">3dp</dimen>
     <dimen name="player_margin">7dp</dimen>
+    <dimen name="player_name_margin">3dp</dimen>
     <dimen name="player_padding">2dp</dimen>
     <dimen name="player_vertical_margin">18dp</dimen>
     <dimen name="player_width">163dp</dimen>
