@@ -111,21 +111,21 @@ public final class R {
 		public static final int fileChooserTitleText = 0x7f08006d;
 	}
 	public static final class drawable {
-		public static final int common_bar_light_gray_bottom = 0x7f020046;
-		public static final int common_btn_green_disabled = 0x7f020047;
-		public static final int common_btn_green_focused = 0x7f020048;
-		public static final int common_btn_green_normal = 0x7f020049;
-		public static final int common_btn_green_pressed = 0x7f02004a;
-		public static final int common_btn_light_gray_disabled = 0x7f02004b;
-		public static final int common_btn_light_gray_focused = 0x7f02004c;
-		public static final int common_btn_light_gray_normal = 0x7f02004d;
-		public static final int common_btn_light_gray_pressed = 0x7f02004e;
-		public static final int common_button_green = 0x7f02004f;
-		public static final int common_button_light_gray = 0x7f020050;
-		public static final int ic_launcher = 0x7f020053;
-		public static final int icon_new = 0x7f020054;
-		public static final int tab_dropbox = 0x7f020057;
-		public static final int tab_dropbox_inactive = 0x7f020058;
+		public static final int common_bar_light_gray_bottom = 0x7f020048;
+		public static final int common_btn_green_disabled = 0x7f020049;
+		public static final int common_btn_green_focused = 0x7f02004a;
+		public static final int common_btn_green_normal = 0x7f02004b;
+		public static final int common_btn_green_pressed = 0x7f02004c;
+		public static final int common_btn_light_gray_disabled = 0x7f02004d;
+		public static final int common_btn_light_gray_focused = 0x7f02004e;
+		public static final int common_btn_light_gray_normal = 0x7f02004f;
+		public static final int common_btn_light_gray_pressed = 0x7f020050;
+		public static final int common_button_green = 0x7f020051;
+		public static final int common_button_light_gray = 0x7f020052;
+		public static final int ic_launcher = 0x7f020055;
+		public static final int icon_new = 0x7f020056;
+		public static final int tab_dropbox = 0x7f020059;
+		public static final int tab_dropbox_inactive = 0x7f02005a;
 	}
 	public static final class id {
 		public static final int dbx_bottom_bar = 0x7f0c006c;

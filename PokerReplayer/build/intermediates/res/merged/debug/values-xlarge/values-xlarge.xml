@@ -20,9 +20,9 @@
     <dimen name="file_name_margin">15dp</dimen>
     <dimen name="handbar_height">105dp</dimen>
     <dimen name="handbar_padding">8dp</dimen>
-    <dimen name="player_height">61dp</dimen>
+    <dimen name="player_height">62dp</dimen>
     <dimen name="player_horizontal_margin">60dp</dimen>
-    <dimen name="player_image_width">57dp</dimen>
+    <dimen name="player_image_width">62dp</dimen>
     <dimen name="player_line_height">3dp</dimen>
     <dimen name="player_margin">8dp</dimen>
     <dimen name="player_name_margin">3dp</dimen>

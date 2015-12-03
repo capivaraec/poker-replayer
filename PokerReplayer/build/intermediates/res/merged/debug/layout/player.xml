@@ -1,42 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/player_width"
     android:layout_height="@dimen/player_height"
-    android:padding="@dimen/player_padding"
+    android:paddingLeft="@dimen/player_image_width"
+    android:paddingStart="@dimen/player_image_width"
+    android:paddingBottom="@dimen/player_padding"
+    android:paddingRight="@dimen/player_padding"
+    android:paddingEnd="@dimen/player_padding"
+    android:paddingTop="@dimen/player_padding"
     android:layout_margin="@dimen/player_margin"
     android:background="@drawable/player">
 
-    <LinearLayout
-        android:layout_width="@dimen/player_image_width"
-        android:layout_height="match_parent"/>
-    <RelativeLayout
+    <com.lb.auto_fit_textview.AutoResizeTextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.lb.auto_fit_textview.AutoResizeTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_name"
-            android:gravity="center_horizontal"
-            android:singleLine="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="@dimen/player_line_height"
-            android:layout_marginRight="@dimen/player_line_height"
-            android:layout_marginStart="@dimen/player_line_height"
-            android:layout_marginLeft="@dimen/player_line_height"
-            android:textColor="@color/whiteText"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/player_line_height"
-            android:orientation="horizontal"
-            android:layout_centerVertical="true" />
-        <com.lb.auto_fit_textview.AutoResizeTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_stack"
-            android:gravity="center_horizontal"
-            android:layout_alignParentBottom="true"
-            android:textColor="@color/stackColor"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_name"
+        android:gravity="center_horizontal"
+        android:singleLine="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/whiteText"/>
+    <com.lb.auto_fit_textview.AutoResizeTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_stack"
+        android:gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/stackColor"/>
 
-</LinearLayout><!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/layout/player.xml -->
+</RelativeLayout><!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/layout/player.xml -->
