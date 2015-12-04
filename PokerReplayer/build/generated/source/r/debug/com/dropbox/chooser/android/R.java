@@ -85,8 +85,8 @@ public final class R {
 		public static final int whiteText = 0x7f0b0089;
 	}
 	public static final class dimen {
-		public static final int appStoreInterstitialMargin = 0x7f08005d;
-		public static final int buttonTextSize = 0x7f08005e;
+		public static final int appStoreInterstitialMargin = 0x7f080061;
+		public static final int buttonTextSize = 0x7f080062;
 		public static final int dbx_action_bar_default_height = 0x7f080005;
 		public static final int dbx_action_bar_icon_vertical_padding = 0x7f080006;
 		public static final int dbx_action_bar_subtitle_bottom_margin = 0x7f080007;
@@ -94,21 +94,21 @@ public final class R {
 		public static final int dbx_action_bar_subtitle_top_margin = 0x7f080009;
 		public static final int dbx_action_bar_title_text_size = 0x7f08000a;
 		public static final int dbx_action_button_min_width = 0x7f08000b;
-		public static final int dbx_dialog_min_width_major = 0x7f080029;
-		public static final int dbx_dialog_min_width_minor = 0x7f08002a;
-		public static final int dbx_dropdownitem_icon_width = 0x7f08005f;
-		public static final int dbx_dropdownitem_text_padding_left = 0x7f080060;
-		public static final int dbx_dropdownitem_text_padding_right = 0x7f080061;
-		public static final int dbx_search_view_preferred_width = 0x7f080062;
-		public static final int dbx_search_view_text_min_width = 0x7f080063;
-		public static final int fileChooserButtonLeft = 0x7f080066;
-		public static final int fileChooserButtonRight = 0x7f080067;
-		public static final int fileChooserButtonsPadding = 0x7f080068;
-		public static final int fileChooserPaddingBottom = 0x7f080069;
-		public static final int fileChooserPaddingLeft = 0x7f08006a;
-		public static final int fileChooserPaddingRight = 0x7f08006b;
-		public static final int fileChooserPaddingTop = 0x7f08006c;
-		public static final int fileChooserTitleText = 0x7f08006d;
+		public static final int dbx_dialog_min_width_major = 0x7f08002d;
+		public static final int dbx_dialog_min_width_minor = 0x7f08002e;
+		public static final int dbx_dropdownitem_icon_width = 0x7f080063;
+		public static final int dbx_dropdownitem_text_padding_left = 0x7f080064;
+		public static final int dbx_dropdownitem_text_padding_right = 0x7f080065;
+		public static final int dbx_search_view_preferred_width = 0x7f080066;
+		public static final int dbx_search_view_text_min_width = 0x7f080067;
+		public static final int fileChooserButtonLeft = 0x7f08006a;
+		public static final int fileChooserButtonRight = 0x7f08006b;
+		public static final int fileChooserButtonsPadding = 0x7f08006c;
+		public static final int fileChooserPaddingBottom = 0x7f08006d;
+		public static final int fileChooserPaddingLeft = 0x7f08006e;
+		public static final int fileChooserPaddingRight = 0x7f08006f;
+		public static final int fileChooserPaddingTop = 0x7f080070;
+		public static final int fileChooserTitleText = 0x7f080071;
 	}
 	public static final class drawable {
 		public static final int common_bar_light_gray_bottom = 0x7f020048;

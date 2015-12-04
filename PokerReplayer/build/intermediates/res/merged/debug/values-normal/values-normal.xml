@@ -4,7 +4,10 @@
     <eat-comment/>
     <dimen name="button_margin">15dp</dimen>
     <dimen name="button_width">60dp</dimen>
+    <dimen name="capivara_size">121dp</dimen>
     <dimen name="center_line_height">30dp</dimen>
+    <dimen name="chip_height">15dp</dimen>
+    <dimen name="chip_width">14dp</dimen>
     <dimen name="file_image_margin">10dp</dimen>
     <dimen name="file_image_size">32dp</dimen>
     <dimen name="file_name_margin">10dp</dimen>
@@ -19,4 +22,5 @@
     <dimen name="player_padding">1dp</dimen>
     <dimen name="player_vertical_margin">10dp</dimen>
     <dimen name="player_width">130dp</dimen>
+    <dimen name="stack_left_margin">32dp</dimen>
 </resources>

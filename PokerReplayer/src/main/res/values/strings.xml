@@ -10,4 +10,5 @@
     <string name="choose_device">Choose from device</string>
     <string name="choose_dropbox">Choose from Dropbox</string>
     <string name="image_icon_description">Item icon</string>
+    <string name="badge_description">Capivara badge</string>
 </resources>

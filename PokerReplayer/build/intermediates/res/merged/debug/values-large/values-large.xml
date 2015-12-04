@@ -16,7 +16,10 @@
     <eat-comment/>
     <dimen name="button_margin">19dp</dimen>
     <dimen name="button_width">74dp</dimen>
+    <dimen name="capivara_size">151dp</dimen>
     <dimen name="center_line_height">53dp</dimen>
+    <dimen name="chip_height">18dp</dimen>
+    <dimen name="chip_width">18dp</dimen>
     <dimen name="file_image_margin">13dp</dimen>
     <dimen name="file_image_size">40dp</dimen>
     <dimen name="file_name_margin">13dp</dimen>
@@ -31,6 +34,7 @@
     <dimen name="player_padding">2dp</dimen>
     <dimen name="player_vertical_margin">18dp</dimen>
     <dimen name="player_width">163dp</dimen>
+    <dimen name="stack_left_margin">40dp</dimen>
     <!-- From: file:/D:/poker-replayer-android/PokerReplayer/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-large/values-large.xml -->
     <eat-comment/>
     <integer name="abc_max_action_buttons">4</integer>
