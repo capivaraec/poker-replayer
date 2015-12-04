@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
 import com.capivaraec.pokerreplayer.components.LayoutPlayer;
+import com.capivaraec.pokerreplayer.components.Stack;
 import com.capivaraec.pokerreplayer.enums.ActionID;
 import com.capivaraec.pokerreplayer.filebrowser.FileBrowserActivity;
 import com.capivaraec.pokerreplayer.history.Action;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentAction;
     private int initialAction;
     private LayoutPlayer[] players;
+    private Stack[] stacks;
     private Button btnPreviousHand;
     private Button btnPreviousAction;
     private Button btnNextAction;
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     private void setPlayers() {
         Hand hand = history.getHand(currentHand);
         players = new LayoutPlayer[hand.getNumPlayers()];
+        stacks = new Stack[hand.getNumPlayers()];
         int[] positions = getPlayersPositions(hand.getNumPlayers());
 
         for(int x = 0; x <= hand.getNumPlayers() - 1; x++) {
@@ -102,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
             int resID = getResources().getIdentifier(playerId, "id", getPackageName());
             players[x] = (LayoutPlayer) findViewById(resID);
             players[x].setVisibility(View.VISIBLE);
+
+            String stackId = "stack_" + positions[x];
+            int resStackID = getResources().getIdentifier(stackId, "id", getPackageName());
+            stacks[x] = (Stack) findViewById(resStackID);
         }
     }
 
@@ -239,9 +246,9 @@ public class MainActivity extends AppCompatActivity {
         for (Action action : actions) {
             ActionID actionID = action.getActionID();
             if (actionID == ActionID.SMALL_BLIND || actionID == ActionID.BIG_BLIND) {
-                putBet(action);
+                putBlindsOrAntes(action);
             } else if (actionID == ActionID.ANTE) {
-                putBet(action);
+                putBlindsOrAntes(action);
             } else if (actionID == ActionID.HOLE_CARDS) {
 //                setPlayerCards(action.getPlayer());
             } else {
@@ -253,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
         initialAction = currentAction;
     }
 
-    private void putBet(Action action) {
+    private void putBlindsOrAntes(Action action) {
         int position = action.getPlayer().getPosition() - 1;
         players[position].setStack(action.getPlayer().getStack());
     }
@@ -274,6 +281,8 @@ public class MainActivity extends AppCompatActivity {
             this.players[(position)].setName(player.getName());
             this.players[position].setStack(player.getStack());
             this.players[position].setVisibility(View.VISIBLE);
+
+            stacks[position].setStack(0);
         }
     }
 
@@ -289,6 +298,8 @@ public class MainActivity extends AppCompatActivity {
 
         players[position].setStack(player.getStack());
         players[position].setAction(action.getActionID());
+
+        stacks[position].setStack(action.getTotalToCall());//TODO: colocar o stack apostado, não o restante
 
         setPotOdds();
     }

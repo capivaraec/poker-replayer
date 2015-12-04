@@ -24,6 +24,7 @@
     <!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/values-pt/strings.xml -->
     <eat-comment/>
     <string name="app_name">Capivara Poker Replayer</string>
+    <string name="badge_description">Escudo Capivara</string>
     <string name="choose_device">Escolher do dispositivo</string>
     <string name="choose_dropbox">Escolher do Dropbox</string>
     <string name="image_icon_description">Ícone do item</string>

@@ -89,6 +89,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_10"
             app:stackGoesToRight="true"
             android:layout_below="@id/player_10"
             android:layout_centerHorizontal="true"/>
@@ -108,6 +109,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_9"
             app:stackGoesToRight="true"
             android:layout_below="@id/player_9"
             android:layout_alignStart="@id/player_9"
@@ -130,6 +132,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_1"
             app:stackGoesToRight="false"
             android:layout_below="@id/player_1"
             android:layout_alignEnd="@id/player_1"
@@ -149,6 +152,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_2"
             app:stackGoesToRight="false"
             android:layout_toLeftOf="@id/player_2"
             android:layout_toStartOf="@id/player_2"
@@ -166,6 +170,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_3"
             app:stackGoesToRight="false"
             android:layout_toLeftOf="@id/player_3"
             android:layout_toStartOf="@id/player_3"
@@ -184,6 +189,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_4"
             app:stackGoesToRight="false"
             android:layout_above="@id/player_4"
             android:layout_alignEnd="@id/player_4"
@@ -202,6 +208,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_5"
             app:stackGoesToRight="true"
             android:layout_above="@id/player_5"
             android:layout_centerHorizontal="true"/>
@@ -219,6 +226,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_6"
             app:stackGoesToRight="true"
             android:layout_above="@id/player_6"
             android:layout_alignStart="@id/player_6"
@@ -238,6 +246,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_7"
             app:stackGoesToRight="false"
             android:layout_toRightOf="@id/player_7"
             android:layout_toEndOf="@id/player_7"
@@ -255,6 +264,7 @@
         <com.capivaraec.pokerreplayer.components.Stack
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/stack_8"
             app:stackGoesToRight="false"
             android:layout_toRightOf="@id/player_8"
             android:layout_toEndOf="@id/player_8"

@@ -65,7 +65,7 @@
     <!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#00AA00</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <!-- From: file:/D:/poker-replayer-android/PokerReplayer/build/intermediates/exploded-aar/poker-replayer-android/dropboxChooserSDK/unspecified/res/values/values.xml -->
     <eat-comment/>
@@ -382,6 +382,7 @@
     <!-- From: file:/D:/poker-replayer-android/PokerReplayer/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">Capivara Poker Replayer</string>
+    <string name="badge_description">Capivara badge</string>
     <string name="choose_device">Choose from device</string>
     <string name="choose_dropbox">Choose from Dropbox</string>
     <!-- From: file:/D:/poker-replayer-android/PokerReplayer/build/intermediates/exploded-aar/poker-replayer-android/dropboxChooserSDK/unspecified/res/values/values.xml -->
