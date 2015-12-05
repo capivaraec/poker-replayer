@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private int currentAction;
     private int initialAction;
     private LayoutPlayer[] players;
-    private Stack[] stacks;
     private Button btnPreviousHand;
     private Button btnPreviousAction;
     private Button btnNextAction;
@@ -97,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
     private void setPlayers() {
         Hand hand = history.getHand(currentHand);
         players = new LayoutPlayer[hand.getNumPlayers()];
-        stacks = new Stack[hand.getNumPlayers()];
         int[] positions = getPlayersPositions(hand.getNumPlayers());
 
         for(int x = 0; x <= hand.getNumPlayers() - 1; x++) {
@@ -108,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
             String stackId = "stack_" + positions[x];
             int resStackID = getResources().getIdentifier(stackId, "id", getPackageName());
-            stacks[x] = (Stack) findViewById(resStackID);
+            players[x].setLayoutStack((Stack) findViewById(resStackID));
         }
     }
 
@@ -262,7 +260,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void putBlindsOrAntes(Action action) {
         int position = action.getPlayer().getPosition() - 1;
-        players[position].setStack(action.getPlayer().getStack());
+        if (action.getActionID() == ActionID.ANTE || action.getActionID() == ActionID.ALL_IN) {
+            players[position].setStack(action.getPlayer().getStack());
+        } else {
+            players[position].setStack(action.getPlayer().getStack(), action.getValue());
+        }
     }
 
     private void setPlayers(HashMap<String, Player> players) {
@@ -278,11 +280,9 @@ public class MainActivity extends AppCompatActivity {
             }
             int position = player.getPosition() - 1;
 
-            this.players[(position)].setName(player.getName());
+            this.players[position].setName(player.getName());
             this.players[position].setStack(player.getStack());
             this.players[position].setVisibility(View.VISIBLE);
-
-            stacks[position].setStack(0);
         }
     }
 
@@ -293,15 +293,24 @@ public class MainActivity extends AppCompatActivity {
         int position = player.getPosition() - 1;
 
         if (position < 0) { //TODO: colocar cartas do board
+            clearPlayersBet();
             return;
         }
 
-        players[position].setStack(player.getStack());
+        players[position].setStack(player.getStack(), action.getValue());
         players[position].setAction(action.getActionID());
 
-        stacks[position].setStack(action.getTotalToCall());//TODO: colocar o stack apostado, não o restante
-
         setPotOdds();
+    }
+
+    private void clearPlayersBet() {
+        Hand hand = history.getHand(currentHand);
+        for (Player player : hand.getPlayers().values()) {
+            int position = player.getPosition() - 1;
+            if (position >= 0) {
+                players[position].clearValueSpent();
+            }
+        }
     }
 
     private void setPotOdds() {
@@ -350,6 +359,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void previousHand(View v) {
+        clearPlayersBet();
         currentHand--;
 
         readHand();
@@ -366,6 +376,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nextHand(View v) {
+        clearPlayersBet();
         currentHand++;
 
         readHand();

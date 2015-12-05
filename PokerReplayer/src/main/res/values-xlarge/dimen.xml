@@ -5,7 +5,7 @@
     <dimen name="handbar_height">105dp</dimen>
     <dimen name="handbar_padding">8dp</dimen>
     <dimen name="center_line_height">75dp</dimen>
-    <dimen name="player_horizontal_margin">60dp</dimen>
+    <dimen name="player_horizontal_margin">75dp</dimen>
     <dimen name="player_vertical_margin">25dp</dimen>
     <dimen name="player_width">195dp</dimen>
     <dimen name="player_height">62dp</dimen>

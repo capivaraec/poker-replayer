@@ -62,6 +62,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_bar"
         android:background="@drawable/table" >
+        <!--TODO: usar imagem menor para diminuir slow down
         <ImageView
             android:layout_width="@dimen/capivara_size"
             android:layout_height="@dimen/capivara_size"
@@ -70,7 +71,7 @@
             android:layout_centerVertical="true"
             android:alpha="0.5"
             android:contentDescription="@string/badge_description"/>
-
+-->
         <LinearLayout
             android:id="@+id/center_line"
             android:layout_width="match_parent"

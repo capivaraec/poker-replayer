@@ -19,7 +19,8 @@
             android:id="@+id/button_previous_hand"
             android:text="@string/previous_hand"
             android:visibility="gone"
-            android:onClick="previousHand" />
+            android:onClick="previousHand"
+            android:longClickable="true" />
         <Button
             android:layout_width="@dimen/button_width"
             android:layout_height="match_parent"
@@ -62,6 +63,7 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_bar"
         android:background="@drawable/table" >
+        <!--TODO: usar imagem menor para diminuir slow down
         <ImageView
             android:layout_width="@dimen/capivara_size"
             android:layout_height="@dimen/capivara_size"
@@ -70,7 +72,7 @@
             android:layout_centerVertical="true"
             android:alpha="0.5"
             android:contentDescription="@string/badge_description"/>
-
+-->
         <LinearLayout
             android:id="@+id/center_line"
             android:layout_width="match_parent"

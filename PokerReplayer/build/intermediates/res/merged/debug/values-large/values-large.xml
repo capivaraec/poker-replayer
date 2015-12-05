@@ -26,7 +26,7 @@
     <dimen name="handbar_height">88dp</dimen>
     <dimen name="handbar_padding">7dp</dimen>
     <dimen name="player_height">52dp</dimen>
-    <dimen name="player_horizontal_margin">40dp</dimen>
+    <dimen name="player_horizontal_margin">53dp</dimen>
     <dimen name="player_image_width">52dp</dimen>
     <dimen name="player_line_height">3dp</dimen>
     <dimen name="player_margin">7dp</dimen>
