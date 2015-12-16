@@ -22,7 +22,7 @@ public class LayoutPlayer extends LinearLayout {
     private final TextView tvName;
     private final TextView tvStack;
     private final Context context;
-    private String currency = "$";
+    private String currency;
     private Stack layoutStack;
 
     public LayoutPlayer(Context context, AttributeSet attrs) {
@@ -53,13 +53,13 @@ public class LayoutPlayer extends LinearLayout {
         }
     }
 
-    public void setStack(float layoutStack) {//TODO: verificar se é cash e colocar a moeda correta (dólar, euro etc)
-        if (layoutStack == 0) {
+    public void setStack(float stack) {
+        if (stack == 0) {
             setStack(allIn);
             return;
         }
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        String strStack = currency + " " + decimalFormat.format(layoutStack);
+        String strStack = currency + decimalFormat.format(stack);
         tvStack.setText(strStack);
     }
 
@@ -72,7 +72,13 @@ public class LayoutPlayer extends LinearLayout {
     }
 
     public void setCurrency(String currency) {
+        if (currency == null) {
+            currency = "";
+        } else {
+            currency += " ";
+        }
         this.currency = currency;
+        layoutStack.setCurrency(currency);
     }
 
     private void changeAction(String action) {

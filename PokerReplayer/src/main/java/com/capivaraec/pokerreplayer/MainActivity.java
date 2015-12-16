@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.capivaraec.pokerreplayer.components.HandInfo;
 import com.capivaraec.pokerreplayer.components.LayoutPlayer;
@@ -26,6 +27,7 @@ import com.capivaraec.pokerreplayer.utils.Cache;
 import com.dropbox.chooser.android.DbxChooser;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnPreviousAction;
     private Button btnNextAction;
     private Button btnNextHand;
+    private TextView boardStack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         btnPreviousAction = (Button) findViewById(R.id.button_previous_action);
         btnNextAction = (Button) findViewById(R.id.button_next_action);
         btnNextHand = (Button) findViewById(R.id.button_next_hand);
+        boardStack = (TextView) findViewById(R.id.board_stack);
 
         String filePath = Cache.getFilePath(this);
         if (filePath != null) {
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             String stackId = "stack_" + positions[x];
             int resStackID = getResources().getIdentifier(stackId, "id", getPackageName());
             players[x].setLayoutStack((Stack) findViewById(resStackID));
+            players[x].setCurrency(history.getCurrency());
         }
     }
 
@@ -213,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readHand() {
+        boardStack.setText("");
         currentAction = 0;
         Cache.setCurrentHand(this, currentHand);
 
@@ -294,13 +300,36 @@ public class MainActivity extends AppCompatActivity {
 
         if (position < 0) { //TODO: colocar cartas do board
             clearPlayersBet();
+            setBoardStack(action.getPot());
             return;
         }
 
-        players[position].setStack(player.getStack(), action.getValue());
+        float value = action.getValue();
+
+        if (action.getActionID() == ActionID.UNCALLED_BET) {
+            value = action.getValueSpent() - action.getValue();
+        } else if (action.getActionID() == ActionID.COLLECTED) {
+            boardStack.setText("");
+        }
+
+        players[position].setStack(player.getStack(), value);
         players[position].setAction(action.getActionID());
 
         setPotOdds();
+    }
+
+    private void setBoardStack(float stack) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String currency = history.getCurrency();
+
+        if (currency == null) {
+            currency = "";
+        } else {
+            currency += " ";
+        }
+
+        String strStack = currency + decimalFormat.format(stack);
+        boardStack.setText(strStack);
     }
 
     private void clearPlayersBet() {
@@ -324,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
             Action nextAction = hand.getAction(currentAction + 1);
             name = nextAction.getPlayer().getName();
             valueSpent = nextAction.getValueSpent();
-            if (nextAction.getPlayer().getPosition() == 0 || nextAction.getActionID() == ActionID.UNCALLED_BET || nextAction.getActionID() == ActionID.SHOWDOWN) {//TODO: estudar todos os casos onde não se deve mais mostrar os pot odds (uncalled bet, showdown etc)
+            if (nextAction.getPlayer().getPosition() == 0 || nextAction.getActionID() == ActionID.UNCALLED_BET || nextAction.getActionID() == ActionID.SHOWDOWN || nextAction.getActionID() == ActionID.COLLECTED) {//TODO: estudar todos os casos onde não se deve mais mostrar os pot odds (uncalled bet, showdown etc)
                 name = null;
             } else if (totalToCall > nextAction.getPlayer().getStack() + valueSpent) {
                 totalToCall = nextAction.getPlayer().getStack() + valueSpent;

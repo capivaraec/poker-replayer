@@ -19,7 +19,7 @@ public class Stack extends LinearLayout {
     private boolean stackGoesToRight;
     private RelativeLayout layoutStack;
     private TextView tvStack;
-    private String currency = "$";
+    private String currency;
 
     public Stack(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,7 +45,7 @@ public class Stack extends LinearLayout {
         }
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        String strStack = currency + " " + decimalFormat.format(stack);
+        String strStack = currency + decimalFormat.format(stack);
         tvStack.setText(strStack);
         //TODO: limpar stacks
         //TODO: lógica para empilhar as fichas

@@ -431,7 +431,9 @@ public class HistoryReader {
 		ActionID actionID = ActionID.UNCALLED_BET;
 		pot -= value;
 
-		Action action = new Action(player.clonePlayer(), value, actionID, street, pot, 0, 0);
+		float streetValue = getValueFromStreet(player.getName(), street, hand.getActions());
+
+		Action action = new Action(player.clonePlayer(), value, actionID, street, pot, 0, streetValue);
 		hand.addAction(action);
 	}
 

@@ -12,6 +12,7 @@ public class History implements Serializable {
 	private Session session;
 	private ArrayList<Hand> hands;
 	private long tourney;
+	private String currency;
 
 	public String getBuyIn() {
 		return buyIn;
@@ -62,5 +63,13 @@ public class History implements Serializable {
 
 	public Hand getHand(int index) {
 		return hands.get(index);
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 }
